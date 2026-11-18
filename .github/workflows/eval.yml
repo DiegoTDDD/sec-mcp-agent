@@ -1,0 +1,62 @@
+name: eval
+
+# End-to-end evaluation with a real local model: builds the filings index from SEC EDGAR and
+# the fraud model from realtime-fraud-detection-ml, serves a model with Ollama on the CPU
+# runner, runs eval/questions.json and commits eval/results.md and the transcripts.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Ollama model
+        default: qwen2.5:3b
+  schedule:
+    - cron: "17 6 * * 1"  # Mondays, so a dependency or model change shows up within a week
+
+permissions:
+  contents: write
+
+concurrency:
+  group: eval
+  cancel-in-progress: false
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      MODEL: ${{ inputs.model || 'qwen2.5:3b' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Build the fraud model (and check feature parity with its training code)
+        run: bash scripts/build_fraud_model.sh
+      - name: Build the filings index from SEC EDGAR
+        env:
+          SEC_IDENTITY: ${{ secrets.SEC_IDENTITY }}
+        run: python scripts/build_index.py
+      - name: Cache Ollama models
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama/models
+          key: ollama-${{ env.MODEL }}
+      - name: Install Ollama and pull the model
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://localhost:11434/api/version && break; sleep 2; done
+          ollama pull "$MODEL"
+      - name: Run the evaluation
+        run: python scripts/run_eval.py --model "$MODEL"
+      - name: Commit results
+        run: |
+          cp data/manifest.json eval/index_manifest.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eval/
+          git commit -m "Eval run ${{ github.run_id }} with $MODEL" || { echo "no changes"; exit 0; }
+          git pull --rebase
+          git push

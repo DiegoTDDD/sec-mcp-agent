@@ -1,0 +1,37 @@
+[
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "filing_date": "2025-10-31",
+  "section": "risk_factors",
+  "text": "The Company depends on component and product manufacturing and logistical services provided by outsourcing partners, many of which are located outside of the U.S. Substantially all of the Company's manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam.\n\nChanges in tariffs and other trade measures could adversely affect the Company's business. New or increased tariffs on the Company's products or components could reduce gross margins and demand.\n\nThe Company's products and services may be affected from time to time by design and manufacturing defects that could materially adversely affect the Company's business and result in harm to the Company's reputation."
+ },
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "filing_date": "2025-10-31",
+  "section": "mda",
+  "text": "Total net sales increased 6% during 2025 compared to 2024, driven primarily by higher net sales of Services and iPhone. Services net sales grew 14% due to higher advertising, cloud and App Store revenue.\n\nGross margin percentage was 46.9% in 2025 compared to 46.2% in 2024, due to a different mix of products and services."
+ },
+ {
+  "ticker": "JPM",
+  "company": "JPMorgan Chase & Co.",
+  "filing_date": "2025-02-14",
+  "section": "risk_factors",
+  "text": "JPMorgan Chase's results of operations could be adversely affected by changes in market interest rates. A decline in interest rates could reduce net interest income, while rapidly rising rates could increase funding costs and credit losses.\n\nJPMorgan Chase could suffer losses due to cybersecurity attacks on its systems or those of third parties. A successful attack could disrupt operations, expose customer information and lead to regulatory penalties."
+ },
+ {
+  "ticker": "JPM",
+  "company": "JPMorgan Chase & Co.",
+  "filing_date": "2025-02-14",
+  "section": "business",
+  "text": "JPMorgan Chase & Co. is a leading financial services firm with operations worldwide. The Firm's reportable business segments are Consumer & Community Banking, Commercial & Investment Bank and Asset & Wealth Management."
+ },
+ {
+  "ticker": "XOM",
+  "company": "Exxon Mobil Corporation",
+  "filing_date": "2025-02-19",
+  "section": "risk_factors",
+  "text": "Crude oil and natural gas prices are volatile and can fall sharply. Lower prices reduce the Corporation's revenues and the value of its reserves, and may lead to impairments of upstream assets.\n\nClimate change regulation, including carbon pricing and emission limits, could increase compliance costs and reduce demand for the Corporation's oil and gas products."
+ }
+]

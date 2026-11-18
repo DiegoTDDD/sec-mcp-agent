@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "sec-filings": {
+      "command": "/absolute/path/to/sec-mcp-agent/.venv/bin/python",
+      "args": ["-m", "sec_mcp_agent.filings.server"],
+      "env": {"SEC_MCP_CHUNKS": "/absolute/path/to/sec-mcp-agent/data/chunks.jsonl"}
+    },
+    "fraud-scoring": {
+      "command": "/absolute/path/to/sec-mcp-agent/.venv/bin/python",
+      "args": ["-m", "sec_mcp_agent.fraud.server"],
+      "env": {"SEC_MCP_FRAUD_MODEL": "/absolute/path/to/sec-mcp-agent/models/fraud"}
+    }
+  }
+}

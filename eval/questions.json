@@ -1,0 +1,232 @@
+[
+ {
+  "id": "f01",
+  "type": "filings",
+  "question": "What does Apple say about its reliance on outsourcing partners to manufacture its products?",
+  "ticker": "AAPL",
+  "section": "risk_factors",
+  "evidence": [
+   "outsourcing"
+  ]
+ },
+ {
+  "id": "f02",
+  "type": "filings",
+  "question": "What does NVIDIA report about US export controls and their effect on its sales?",
+  "ticker": "NVDA",
+  "section": "risk_factors",
+  "evidence": [
+   "export"
+  ]
+ },
+ {
+  "id": "f03",
+  "type": "filings",
+  "question": "What risks does Tesla describe about ramping up vehicle production?",
+  "ticker": "TSLA",
+  "section": "risk_factors",
+  "evidence": [
+   "production"
+  ]
+ },
+ {
+  "id": "f04",
+  "type": "filings",
+  "question": "How does JPMorgan Chase describe its cybersecurity risk?",
+  "ticker": "JPM",
+  "section": "risk_factors",
+  "evidence": [
+   "cyber"
+  ]
+ },
+ {
+  "id": "f05",
+  "type": "filings",
+  "question": "How could climate change regulation affect Exxon Mobil's business, according to its 10-K?",
+  "ticker": "XOM",
+  "section": "risk_factors",
+  "evidence": [
+   "climate"
+  ]
+ },
+ {
+  "id": "f06",
+  "type": "filings",
+  "question": "What does Pfizer say about patent expirations and loss of exclusivity?",
+  "ticker": "PFE",
+  "section": null,
+  "evidence": [
+   "patent",
+   "exclusivity"
+  ]
+ },
+ {
+  "id": "f07",
+  "type": "filings",
+  "question": "How does Coca-Cola describe its operating segments?",
+  "ticker": "KO",
+  "section": "business",
+  "evidence": [
+   "segment"
+  ]
+ },
+ {
+  "id": "f08",
+  "type": "filings",
+  "question": "How many associates does Walmart employ?",
+  "ticker": "WMT",
+  "section": "business",
+  "evidence": [
+   "associates"
+  ]
+ },
+ {
+  "id": "f09",
+  "type": "filings",
+  "question": "Who does Netflix say it competes with for members' entertainment time?",
+  "ticker": "NFLX",
+  "section": null,
+  "evidence": [
+   "compet"
+  ]
+ },
+ {
+  "id": "f10",
+  "type": "filings",
+  "question": "What does Boeing say about 737 production and quality?",
+  "ticker": "BA",
+  "section": null,
+  "evidence": [
+   "737"
+  ]
+ },
+ {
+  "id": "f11",
+  "type": "filings",
+  "question": "What risks does Microsoft describe related to artificial intelligence?",
+  "ticker": "MSFT",
+  "section": "risk_factors",
+  "evidence": [
+   "ai ",
+   "artificial intelligence"
+  ]
+ },
+ {
+  "id": "f12",
+  "type": "filings",
+  "question": "What does Meta say about privacy and data protection regulation?",
+  "ticker": "META",
+  "section": "risk_factors",
+  "evidence": [
+   "privacy",
+   "data protection"
+  ]
+ },
+ {
+  "id": "f13",
+  "type": "filings",
+  "question": "What does UnitedHealth Group say about medical cost trends?",
+  "ticker": "UNH",
+  "section": null,
+  "evidence": [
+   "medical cost"
+  ]
+ },
+ {
+  "id": "f14",
+  "type": "filings",
+  "question": "What does Visa say about interchange fee regulation or litigation?",
+  "ticker": "V",
+  "section": null,
+  "evidence": [
+   "interchange"
+  ]
+ },
+ {
+  "id": "f15",
+  "type": "filings",
+  "question": "What does Amazon's MD&A say about AWS sales?",
+  "ticker": "AMZN",
+  "section": "mda",
+  "evidence": [
+   "aws"
+  ]
+ },
+ {
+  "id": "f16",
+  "type": "filings",
+  "question": "What does Chevron say about the volatility of crude oil prices?",
+  "ticker": "CVX",
+  "section": null,
+  "evidence": [
+   "price"
+  ]
+ },
+ {
+  "id": "o01",
+  "type": "out_of_scope",
+  "question": "What does Toyota list as the main risk factors in its latest 10-K?"
+ },
+ {
+  "id": "o02",
+  "type": "out_of_scope",
+  "question": "What does Starbucks say about coffee bean prices in its 10-K?"
+ },
+ {
+  "id": "t01",
+  "type": "fraud",
+  "question": "Card card_0001 just spent R$ 4,850.00 on electronics in Manaus at 2026-03-01T03:12:00. Score it with the fraud model: is it likely fraud, and why?",
+  "transaction": {
+   "card_id": "card_0001",
+   "amount": 4850.0,
+   "category": "electronics",
+   "city": "Manaus",
+   "timestamp": "2026-03-01T03:12:00",
+   "previous_timestamps": []
+  }
+ },
+ {
+  "id": "t02",
+  "type": "fraud",
+  "question": "Score this transaction: card card_0007 paid R$ 64.90 for groceries in Brasilia at 2026-03-01T12:30:00. Should it raise an alert?",
+  "transaction": {
+   "card_id": "card_0007",
+   "amount": 64.9,
+   "category": "groceries",
+   "city": "Brasilia",
+   "timestamp": "2026-03-01T12:30:00",
+   "previous_timestamps": []
+  }
+ },
+ {
+  "id": "t03",
+  "type": "fraud",
+  "question": "Card card_0003 made fuel purchases in Curitiba at 2026-03-01T10:00:00, 10:00:20, 10:00:41 and 10:01:02, and now another of R$ 3.50 at 2026-03-01T10:01:25. Score the latest one, using the earlier times as the card's history.",
+  "transaction": {
+   "card_id": "card_0003",
+   "amount": 3.5,
+   "category": "fuel",
+   "city": "Curitiba",
+   "timestamp": "2026-03-01T10:01:25",
+   "previous_timestamps": [
+    "2026-03-01T10:00:00",
+    "2026-03-01T10:00:20",
+    "2026-03-01T10:00:41",
+    "2026-03-01T10:01:02"
+   ]
+  }
+ },
+ {
+  "id": "t04",
+  "type": "fraud",
+  "question": "Card card_0005 bought a R$ 1,200.00 travel ticket in Recife at 2026-03-02T15:00:00. What does the fraud model say?",
+  "transaction": {
+   "card_id": "card_0005",
+   "amount": 1200.0,
+   "category": "travel",
+   "city": "Recife",
+   "timestamp": "2026-03-02T15:00:00",
+   "previous_timestamps": []
+  }
+ }
+]

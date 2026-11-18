@@ -1,0 +1,41 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt pytest==9.2.0 anyio==4.16.0 ruff==0.17.5
+      - name: Lint
+        run: ruff check . && ruff format --check .
+      - name: Tests (MCP servers through a real MCP client, agent with a scripted model)
+        run: pytest -q -p anyio
+      - name: Servers start over stdio
+        run: |
+          python - <<'PY'
+          import anyio, json, sys
+          from mcp.client import Client
+          from mcp.client.stdio import StdioServerParameters
+          sys.path.insert(0, "tests")
+          from conftest import fixture_chunks
+          from sec_mcp_agent.filings.corpus import save_chunks
+          save_chunks(fixture_chunks(), "data/chunks.jsonl")
+
+          async def main():
+              params = StdioServerParameters(command=sys.executable,
+                                             args=["-m", "sec_mcp_agent.filings.server"])
+              async with Client(params) as client:
+                  tools = [t.name for t in (await client.list_tools()).tools]
+                  hits = await client.call_tool("search_filings", {"query": "tariffs"})
+                  print(tools, hits.structured_content["result"][0]["chunk_id"])
+          anyio.run(main)
+          PY

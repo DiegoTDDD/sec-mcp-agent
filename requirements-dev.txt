@@ -1,0 +1,6 @@
+pytest==9.2.0
+anyio==4.16.0
+ruff==0.17.5
+edgartools==5.40.1
+pyarrow==23.0.1
+matplotlib==3.9.2
