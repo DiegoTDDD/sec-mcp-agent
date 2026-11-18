@@ -28,7 +28,9 @@ def main() -> None:
 
     model = FraudModel.load(ROOT / "models" / "fraud")
     raw = pd.read_parquet(fraud_repo / "data" / "training_raw.parquet")
-    feats, cols, _ = train_model.build_features(raw.copy())
+    train_df, test_df, cols, home_city = train_model.prepare(raw)
+    assert home_city == model.home_city, "home-city map differs from the saved artifact"
+    feats = pd.concat([train_df, test_df])
     assert cols == model.feature_cols, f"feature columns differ: {cols} vs {model.feature_cols}"
     history = (
         feats.sort_values(["card_id", "timestamp"]).groupby("card_id")["timestamp"].apply(list)

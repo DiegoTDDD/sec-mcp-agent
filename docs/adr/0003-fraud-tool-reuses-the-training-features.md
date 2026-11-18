@@ -9,13 +9,13 @@ answers (training/serving skew). The fraud model's features include velocity
 
 ## Decision
 - `scripts/build_fraud_model.sh` trains the model with realtime-fraud-detection-ml's own code at
-  a pinned commit, then `scripts/check_feature_parity.py` rebuilds 2,000 training rows as tool
+  a pinned commit (3ebb8bb), then `scripts/check_feature_parity.py` rebuilds 2,000 training rows as tool
   inputs and compares every feature and probability with the training pipeline. The eval
   workflow fails if they differ (measured: 2e-13 on features, 5e-7 on probabilities).
 - Timestamps are truncated to whole seconds, because training casts them to `datetime64[s]`.
-  The parity check found this: with fractional seconds, 3 of 500 sampled rows differed. The
-  project's streaming scorer uses fractional seconds, so it carries the same sub-second skew; that
-  is recorded as an item for that project.
+  The parity check caught this in the first version of the tool, which used fractional seconds:
+  3 of 500 sampled rows had a different `time_since_last_tx`. (The fraud project's own streaming
+  scorer shares its feature module with training, so it already truncates.)
 - Explanations are XGBoost's exact per-feature contributions to the log-odds (TreeSHAP), so the
   agent reports the model's reasons instead of inventing them.
 

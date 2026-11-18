@@ -6,7 +6,7 @@
 set -euo pipefail
 
 REPO=https://github.com/DiegoTDDD/realtime-fraud-detection-ml
-COMMIT=ae11fb2705c18bd3436c599ad577217a856509f1
+COMMIT=3ebb8bba1cce094070b6411a14442bcab8b16a0e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT

@@ -41,7 +41,7 @@ JSON answer (schema-constrained) ──► citation verifier ──► AgentAnsw
   still fails is reported, never passed through.
 - **Fraud tool parity**: the model is trained by the fraud project's own code at a pinned
   commit, and a check rebuilds 2,000 training rows as tool calls: features match to 2e-13 and
-  probabilities to 5e-7. The check found a sub-second training/serving skew (ADR 0003).
+  probabilities to 5e-7. It caught a sub-second mismatch in the tool's first version (ADR 0003).
 
 ## Results
 
