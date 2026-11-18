@@ -1,0 +1,14 @@
+Q: What does NVIDIA report about US export controls and their effect on its sales?
+
+NVIDIA reports that US export controls have and are likely to have a disproportionate impact on NVIDIA and may disadvantage the company against certain of its competitors that sell chips outside the scope of such control. These controls have already encouraged customers outside China and other impacted regions to 'design-out' certain U.S. semiconductors from their products to reduce the compliance burden and risk, and to ensure they are able to serve markets worldwide. Export controls have also encouraged and may encourage overseas governments to request that their customers purchase from NVIDIA's competitors rather than NVIDIA, harming the company's business, market position, and financial results. Additionally, export controls have negatively impacted demand for NVIDIA's products and services, leading to excess inventory or purchase obligations, and have increased the risk of investing in U.S. advanced semiconductor products.
+
+[1] Nvidia Corp (NVDA) 10-K 2026-02-25, risk_factors, NVDA-2026-02-25-risk_factors-095
+    "Export controls have and are likely in the future to have a disproportionate impact on NVIDIA and may disadvantage us against certain of our competitors that sell chips that are outside the scope of such control."
+[2] Nvidia Corp (NVDA) 10-K 2026-02-25, risk_factors, NVDA-2026-02-25-risk_factors-096
+    "As a result, export controls have in the past and may in the future negatively impact demand for our products and services not only in China, but also in other markets, such as Europe, Latin America, and Southeast Asia."
+[3] Nvidia Corp (NVDA) 10-K 2026-02-25, risk_factors, NVDA-2026-02-25-risk_factors-082
+    "Increasing use of economic sanctions and export controls has impacted and may in the future impact demand for our products or services, negatively impacting our business and financial results."
+[4] Nvidia Corp (NVDA) 10-K 2026-02-25, risk_factors, NVDA-2026-02-25-risk_factors-094
+    "Export controls may disrupt our supply and distribution chain for a substantial portion of our products, which are warehoused in and distributed from Hong Kong."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 5 LLM calls, 209.3s

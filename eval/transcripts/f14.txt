@@ -1,0 +1,11 @@
+Q: What does Visa say about interchange fee regulation or litigation?
+
+[chunk_id: V-2026-11-05-risk_factors-006, quote: 'EU’s Interchange Fee Regulation caps consumer credit and debit IRFs for transactions within the EEA. Member states may impose further reductions, and the European Commission (EC) may periodically reassess Interchange Fee Regulations, which could further lower caps or expand regulation to additional products, services and fees.']
+[chunk_id: V-2026-11-05-risk_factors-002, quote: 'We may also face differing rules and regulations across jurisdictions in areas such as interchange reimbursement rates, preferred routing, co-badging, domestic processing and localization requirements, currency conversion, point-of-sale transaction rules and practices, privacy, cybersecurity, resilience, data use and protection, licensing requirements and associated product technology.']
+
+[1] Visa Inc. (V) 10-K 2026-11-05, risk_factors, V-2026-11-05-risk_factors-006
+    "EU’s Interchange Fee Regulation caps consumer credit and debit IRFs for transactions within the EEA. Member states may impose further reductions, and the European Commission (EC) may periodically reassess Interchange Fee Regulations, which could further lower caps or expand regulation to additional products, services and fees."
+[2] Visa Inc. (V) 10-K 2026-11-05, risk_factors, V-2026-11-05-risk_factors-002
+    "We may also face differing rules and regulations across jurisdictions in areas such as interchange reimbursement rates, preferred routing, co-badging, domestic processing and localization requirements, currency conversion, point-of-sale transaction rules and practices, privacy, cybersecurity, resilience, data use and protection, licensing requirements and associated product technology."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 5 LLM calls, 272.1s

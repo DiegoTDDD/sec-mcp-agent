@@ -1,0 +1,9 @@
+Q: What does Meta say about privacy and data protection regulation?
+
+Meta Platforms, Inc. (META) mentions the General Data Protection Regulation (GDPR), ePrivacy Directive, European Digital Services Act, Digital Markets Act, and U.S. state privacy laws as legislative and regulatory developments that have impacted their ability to use data signals in their ad products. They have implemented changes to their products and user data practices to reduce their ability to effectively target and measure ads and may negatively impact their advertising revenue and user engagement.
+
+[1] Meta Platforms, Inc. (META) 10-K 2026-01-29, mda, META-2026-01-29-mda-008
+    "To mitigate these developments, we are continually working to evolve our advertising systems to improve the performance of our ad products. We are developing privacy enhancing technologies to deliver relevant ads and measurement capabilities while reducing the amount of personal information we process, including by relying more on anonymized or aggregated third-party data."
+[rejected] META-2026-01-29-mda-006: quote is not in the passage word for word
+
+grounded=False | tools: search_filings (error), search_filings | qwen2.5:3b, 5 LLM calls, 151.9s

@@ -1,0 +1,6 @@
+Q: How does Coca-Cola describe its operating segments?
+
+Coca-Cola describes its operating segments in its 10-K filings. The specific description can be found in the 'Management's Discussion and Analysis of Financial Condition and Results of Operations' section of the filings.
+
+
+grounded=True | tools: none | qwen2.5:3b, 2 LLM calls, 12.4s

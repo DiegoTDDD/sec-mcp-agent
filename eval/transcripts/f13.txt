@@ -1,0 +1,6 @@
+Q: What does UnitedHealth Group say about medical cost trends?
+
+
+
+
+grounded=False | tools: search_filings (error), search_filings (error), search_filings (error), search_filings (error) | qwen2.5:3b, 6 LLM calls, 45.9s

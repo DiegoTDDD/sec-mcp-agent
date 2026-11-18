@@ -1,0 +1,6 @@
+Q: Score this transaction: card card_0007 paid R$ 64.90 for groceries in Brasilia at 2026-03-01T12:30:00. Should it raise an alert?
+
+
+
+
+grounded=True | tools: score_transaction (error) | qwen2.5:3b, 3 LLM calls, 34.4s

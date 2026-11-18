@@ -1,0 +1,6 @@
+Q: What does Starbucks say about coffee bean prices in its 10-K?
+
+
+
+
+grounded=False | tools: search_filings (error), search_filings (error), search_filings (error), search_filings (error), search_filings (error) | qwen2.5:3b, 7 LLM calls, 64.7s

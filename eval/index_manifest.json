@@ -1,0 +1,515 @@
+[
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "filing_date": "2026-11-03",
+  "accession": "0000320193-26-000026",
+  "section": "business",
+  "chars": 20797,
+  "chunks": 24
+ },
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "filing_date": "2026-11-03",
+  "accession": "0000320193-26-000026",
+  "section": "risk_factors",
+  "chars": 86691,
+  "chunks": 94
+ },
+ {
+  "ticker": "AAPL",
+  "company": "Apple Inc.",
+  "filing_date": "2026-11-03",
+  "accession": "0000320193-26-000026",
+  "section": "mda",
+  "chars": 17630,
+  "chunks": 17
+ },
+ {
+  "ticker": "MSFT",
+  "company": "Microsoft Corp",
+  "filing_date": "2026-07-29",
+  "accession": "0001193125-26-323660",
+  "section": "business",
+  "chars": 41186,
+  "chunks": 42
+ },
+ {
+  "ticker": "MSFT",
+  "company": "Microsoft Corp",
+  "filing_date": "2026-07-29",
+  "accession": "0001193125-26-323660",
+  "section": "risk_factors",
+  "chars": 81052,
+  "chunks": 90
+ },
+ {
+  "ticker": "MSFT",
+  "company": "Microsoft Corp",
+  "filing_date": "2026-07-29",
+  "accession": "0001193125-26-323660",
+  "section": "mda",
+  "chars": 51925,
+  "chunks": 52
+ },
+ {
+  "ticker": "NVDA",
+  "company": "Nvidia Corp",
+  "filing_date": "2026-02-25",
+  "accession": "0001045810-26-000021",
+  "section": "business",
+  "chars": 48216,
+  "chunks": 51
+ },
+ {
+  "ticker": "NVDA",
+  "company": "Nvidia Corp",
+  "filing_date": "2026-02-25",
+  "accession": "0001045810-26-000021",
+  "section": "risk_factors",
+  "chars": 114755,
+  "chunks": 125
+ },
+ {
+  "ticker": "NVDA",
+  "company": "Nvidia Corp",
+  "filing_date": "2026-02-25",
+  "accession": "0001045810-26-000021",
+  "section": "mda",
+  "chars": 34149,
+  "chunks": 34
+ },
+ {
+  "ticker": "AMZN",
+  "company": "Amazon Com Inc",
+  "filing_date": "2026-02-06",
+  "accession": "0001018724-26-000004",
+  "section": "business",
+  "chars": 13496,
+  "chunks": 15
+ },
+ {
+  "ticker": "AMZN",
+  "company": "Amazon Com Inc",
+  "filing_date": "2026-02-06",
+  "accession": "0001018724-26-000004",
+  "section": "risk_factors",
+  "chars": 60651,
+  "chunks": 68
+ },
+ {
+  "ticker": "AMZN",
+  "company": "Amazon Com Inc",
+  "filing_date": "2026-02-06",
+  "accession": "0001018724-26-000004",
+  "section": "mda",
+  "chars": 46283,
+  "chunks": 49
+ },
+ {
+  "ticker": "GOOGL",
+  "company": "Alphabet Inc.",
+  "filing_date": "2026-02-05",
+  "accession": "0001652044-26-000018",
+  "section": "business",
+  "chars": 23827,
+  "chunks": 26
+ },
+ {
+  "ticker": "GOOGL",
+  "company": "Alphabet Inc.",
+  "filing_date": "2026-02-05",
+  "accession": "0001652044-26-000018",
+  "section": "risk_factors",
+  "chars": 85283,
+  "chunks": 93
+ },
+ {
+  "ticker": "GOOGL",
+  "company": "Alphabet Inc.",
+  "filing_date": "2026-02-05",
+  "accession": "0001652044-26-000018",
+  "section": "mda",
+  "chars": 52513,
+  "chunks": 52
+ },
+ {
+  "ticker": "META",
+  "company": "Meta Platforms, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003942",
+  "section": "business",
+  "chars": 24546,
+  "chunks": 29
+ },
+ {
+  "ticker": "META",
+  "company": "Meta Platforms, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003942",
+  "section": "risk_factors",
+  "chars": 195513,
+  "chunks": 212
+ },
+ {
+  "ticker": "META",
+  "company": "Meta Platforms, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003942",
+  "section": "mda",
+  "chars": 60319,
+  "chunks": 62
+ },
+ {
+  "ticker": "JPM",
+  "company": "Jpmorgan Chase & Co",
+  "filing_date": "2026-02-13",
+  "accession": "0001628280-26-008131",
+  "section": "business",
+  "chars": 39219,
+  "chunks": 45
+ },
+ {
+  "ticker": "JPM",
+  "company": "Jpmorgan Chase & Co",
+  "filing_date": "2026-02-13",
+  "accession": "0001628280-26-008131",
+  "section": "risk_factors",
+  "chars": 112855,
+  "chunks": 111
+ },
+ {
+  "ticker": "JPM",
+  "company": "Jpmorgan Chase & Co",
+  "filing_date": "2026-02-13",
+  "accession": "0001628280-26-008131",
+  "section": "mda",
+  "chars": 414305,
+  "chunks": 406
+ },
+ {
+  "ticker": "BAC",
+  "company": "Bank Of America Corp /De/",
+  "filing_date": "2026-02-25",
+  "accession": "0000070858-26-000157",
+  "section": "business",
+  "chars": 38054,
+  "chunks": 41
+ },
+ {
+  "ticker": "BAC",
+  "company": "Bank Of America Corp /De/",
+  "filing_date": "2026-02-25",
+  "accession": "0000070858-26-000157",
+  "section": "risk_factors",
+  "chars": 117121,
+  "chunks": 134
+ },
+ {
+  "ticker": "BAC",
+  "company": "Bank Of America Corp /De/",
+  "filing_date": "2026-02-25",
+  "accession": "0000070858-26-000157",
+  "section": "mda",
+  "chars": 294259,
+  "chunks": 293
+ },
+ {
+  "ticker": "GS",
+  "company": "Goldman Sachs Group Inc",
+  "filing_date": "2026-02-25",
+  "accession": "0000886982-26-000091",
+  "section": "business",
+  "chars": 152440,
+  "chunks": 165
+ },
+ {
+  "ticker": "GS",
+  "company": "Goldman Sachs Group Inc",
+  "filing_date": "2026-02-25",
+  "accession": "0000886982-26-000091",
+  "section": "risk_factors",
+  "chars": 142137,
+  "chunks": 153
+ },
+ {
+  "ticker": "GS",
+  "company": "Goldman Sachs Group Inc",
+  "filing_date": "2026-02-25",
+  "accession": "0000886982-26-000091",
+  "section": "mda",
+  "chars": 310308,
+  "chunks": 311
+ },
+ {
+  "ticker": "V",
+  "company": "Visa Inc.",
+  "filing_date": "2026-11-05",
+  "accession": "0001403161-26-000134",
+  "section": "business",
+  "chars": 79178,
+  "chunks": 89
+ },
+ {
+  "ticker": "V",
+  "company": "Visa Inc.",
+  "filing_date": "2026-11-05",
+  "accession": "0001403161-26-000134",
+  "section": "risk_factors",
+  "chars": 68394,
+  "chunks": 74
+ },
+ {
+  "ticker": "V",
+  "company": "Visa Inc.",
+  "filing_date": "2026-11-05",
+  "accession": "0001403161-26-000134",
+  "section": "mda",
+  "chars": 49782,
+  "chunks": 48
+ },
+ {
+  "ticker": "JNJ",
+  "company": "Johnson & Johnson",
+  "filing_date": "2026-02-11",
+  "accession": "0000200406-26-000016",
+  "section": "business",
+  "chars": 34642,
+  "chunks": 36
+ },
+ {
+  "ticker": "JNJ",
+  "company": "Johnson & Johnson",
+  "filing_date": "2026-02-11",
+  "accession": "0000200406-26-000016",
+  "section": "risk_factors",
+  "chars": 43439,
+  "chunks": 47
+ },
+ {
+  "ticker": "JNJ",
+  "company": "Johnson & Johnson",
+  "filing_date": "2026-02-11",
+  "accession": "0000200406-26-000016",
+  "section": "mda",
+  "chars": 65891,
+  "chunks": 72
+ },
+ {
+  "ticker": "PFE",
+  "company": "Pfizer Inc",
+  "filing_date": "2026-02-26",
+  "accession": "0000078003-26-000026",
+  "section": "business",
+  "chars": 92075,
+  "chunks": 102
+ },
+ {
+  "ticker": "PFE",
+  "company": "Pfizer Inc",
+  "filing_date": "2026-02-26",
+  "accession": "0000078003-26-000026",
+  "section": "risk_factors",
+  "chars": 87507,
+  "chunks": 93
+ },
+ {
+  "ticker": "PFE",
+  "company": "Pfizer Inc",
+  "filing_date": "2026-02-26",
+  "accession": "0000078003-26-000026",
+  "section": "mda",
+  "chars": 105578,
+  "chunks": 111
+ },
+ {
+  "ticker": "UNH",
+  "company": "Unitedhealth Group Inc",
+  "filing_date": "2026-03-02",
+  "accession": "0000731766-26-000062",
+  "section": "business",
+  "chars": 46838,
+  "chunks": 49
+ },
+ {
+  "ticker": "UNH",
+  "company": "Unitedhealth Group Inc",
+  "filing_date": "2026-03-02",
+  "accession": "0000731766-26-000062",
+  "section": "risk_factors",
+  "chars": 66884,
+  "chunks": 75
+ },
+ {
+  "ticker": "UNH",
+  "company": "Unitedhealth Group Inc",
+  "filing_date": "2026-03-02",
+  "accession": "0000731766-26-000062",
+  "section": "mda",
+  "chars": 48696,
+  "chunks": 51
+ },
+ {
+  "ticker": "XOM",
+  "company": "Exxon Mobil Corp",
+  "filing_date": "2026-02-18",
+  "accession": "0000034088-26-000045",
+  "section": "business",
+  "chars": 6628,
+  "chunks": 7
+ },
+ {
+  "ticker": "XOM",
+  "company": "Exxon Mobil Corp",
+  "filing_date": "2026-02-18",
+  "accession": "0000034088-26-000045",
+  "section": "risk_factors",
+  "chars": 35635,
+  "chunks": 43
+ },
+ {
+  "ticker": "XOM",
+  "company": "Exxon Mobil Corp",
+  "filing_date": "2026-02-18",
+  "accession": "0000034088-26-000045",
+  "section": "mda",
+  "chars": 130335,
+  "chunks": 134
+ },
+ {
+  "ticker": "CVX",
+  "company": "Chevron Corp",
+  "filing_date": "2026-02-24",
+  "accession": "0000093410-26-000078",
+  "section": "business",
+  "chars": 77924,
+  "chunks": 80
+ },
+ {
+  "ticker": "CVX",
+  "company": "Chevron Corp",
+  "filing_date": "2026-02-24",
+  "accession": "0000093410-26-000078",
+  "section": "risk_factors",
+  "chars": 34551,
+  "chunks": 43
+ },
+ {
+  "ticker": "CVX",
+  "company": "Chevron Corp",
+  "filing_date": "2026-02-24",
+  "accession": "0000093410-26-000078",
+  "section": "mda",
+  "chars": 125351,
+  "chunks": 129
+ },
+ {
+  "ticker": "KO",
+  "company": "Coca Cola Co",
+  "filing_date": "2026-02-20",
+  "accession": "0001628280-26-010047",
+  "section": "business",
+  "chars": 55357,
+  "chunks": 60
+ },
+ {
+  "ticker": "KO",
+  "company": "Coca Cola Co",
+  "filing_date": "2026-02-20",
+  "accession": "0001628280-26-010047",
+  "section": "risk_factors",
+  "chars": 92458,
+  "chunks": 99
+ },
+ {
+  "ticker": "KO",
+  "company": "Coca Cola Co",
+  "filing_date": "2026-02-20",
+  "accession": "0001628280-26-010047",
+  "section": "mda",
+  "chars": 109907,
+  "chunks": 118
+ },
+ {
+  "ticker": "WMT",
+  "company": "Walmart Inc.",
+  "filing_date": "2026-03-13",
+  "accession": "0000104169-26-000055",
+  "section": "business",
+  "chars": 37555,
+  "chunks": 41
+ },
+ {
+  "ticker": "WMT",
+  "company": "Walmart Inc.",
+  "filing_date": "2026-03-13",
+  "accession": "0000104169-26-000055",
+  "section": "risk_factors",
+  "chars": 93314,
+  "chunks": 103
+ },
+ {
+  "ticker": "WMT",
+  "company": "Walmart Inc.",
+  "filing_date": "2026-03-13",
+  "accession": "0000104169-26-000055",
+  "section": "mda",
+  "chars": 58156,
+  "chunks": 61
+ },
+ {
+  "ticker": "NFLX",
+  "company": "Netflix Inc",
+  "filing_date": "2026-01-23",
+  "accession": "0001065280-26-000034",
+  "section": "business",
+  "chars": 9133,
+  "chunks": 11
+ },
+ {
+  "ticker": "NFLX",
+  "company": "Netflix Inc",
+  "filing_date": "2026-01-23",
+  "accession": "0001065280-26-000034",
+  "section": "risk_factors",
+  "chars": 75038,
+  "chunks": 81
+ },
+ {
+  "ticker": "NFLX",
+  "company": "Netflix Inc",
+  "filing_date": "2026-01-23",
+  "accession": "0001065280-26-000034",
+  "section": "mda",
+  "chars": 37347,
+  "chunks": 40
+ },
+ {
+  "ticker": "BA",
+  "company": "Boeing Co",
+  "filing_date": "2026-01-30",
+  "accession": "0001628280-26-004357",
+  "section": "business",
+  "chars": 18357,
+  "chunks": 19
+ },
+ {
+  "ticker": "BA",
+  "company": "Boeing Co",
+  "filing_date": "2026-01-30",
+  "accession": "0001628280-26-004357",
+  "section": "risk_factors",
+  "chars": 57139,
+  "chunks": 64
+ },
+ {
+  "ticker": "BA",
+  "company": "Boeing Co",
+  "filing_date": "2026-01-30",
+  "accession": "0001628280-26-004357",
+  "section": "mda",
+  "chars": 89626,
+  "chunks": 95
+ }
+]

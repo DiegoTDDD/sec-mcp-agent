@@ -1,0 +1,10 @@
+Q: What does Chevron say about the volatility of crude oil prices?
+
+Chevron is primarily in a commodities business that has a history of price volatility. The most significant factor that affects the company’s results of operations are the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by various factors including general economic conditions, industry production and inventory levels, technology advancements, geopolitical risks, and governmental regulations.
+
+[1] Chevron Corp (CVX) 10-K 2026-02-24, risk_factors, CVX-2026-02-24-risk_factors-001
+    "Chevron is primarily in a commodities business that has a history of price volatility."
+[2] Chevron Corp (CVX) 10-K 2026-02-24, risk_factors, CVX-2026-02-24-risk_factors-002
+    "Chevron evaluates the risk of changing commodity prices as a core part of its business planning process."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 5 LLM calls, 110.6s

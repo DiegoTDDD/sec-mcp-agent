@@ -1,0 +1,6 @@
+Q: What does Toyota list as the main risk factors in its latest 10-K?
+
+Toyota lists several risk factors in its 10-K filing, including but not limited to: failure to meet the evolving needs of the industry and markets, competition, long manufacturing lead times, uncertain supply and capacity availability, mismatches between supply and demand, and credit risk on trade accounts receivable, vendor non-trade receivables, and prepayments related to long-term supply agreements. These risks could have a material adverse effect on the company's business, financial condition, results of operations, and reputation.
+
+
+grounded=False | tools: search_filings (error), search_filings | qwen2.5:3b, 4 LLM calls, 79.7s

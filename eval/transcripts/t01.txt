@@ -1,0 +1,12 @@
+Q: Card card_0001 just spent R$ 4,850.00 on electronics in Manaus at 2026-03-01T03:12:00. Score it with the fraud model: is it likely fraud, and why?
+
+The transaction is not likely to be fraudulent. The probability of it being fraudulent is 0.039804, which is below the threshold of 0.562504. The top reasons for this low probability are the long time since the last transaction (99999.0) and the absence of transactions in the entertainment category (0.0).
+
+[rejected] home_city: chunk_id was not returned by any tool
+[rejected] threshold: chunk_id was not returned by any tool
+[rejected] time_since_last_tx: chunk_id was not returned by any tool
+[rejected] category_entertainment: chunk_id was not returned by any tool
+[rejected] tx_count_last_5min: chunk_id was not returned by any tool
+[fraud model] p=0.040 flagged=False threshold=0.563; time_since_last_tx=99999 (-2.08), category_entertainment=0 (-1.77), tx_count_last_5min=0 (+1.14)
+
+grounded=False | tools: score_transaction | qwen2.5:3b, 4 LLM calls, 100.2s

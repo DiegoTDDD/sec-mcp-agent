@@ -1,0 +1,13 @@
+Q: What does Pfizer say about patent expirations and loss of exclusivity?
+
+[chunk_id: PFE-2026-02-26-risk_factors-011, quote: Certain of our products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and we expect certain products to face new or increased generic competition over the next few years. We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations. In addition, patents covering a number of our best-selling products are, or have been, the subject of pending legal challenges. For additional information on our patents, see the Item 1. Business—Patents and Other Intellectual Property Rights section. Furthermore, our recent business development initiatives have been concentrated in certain therapeutic areas — for example, our acquisitions of Metsera and Seagen represent significant investments in obesity and oncology, respectively, which are extremely competitive therapeutic areas. In addition, revenues from Comirnaty and Paxlovid have decreased substantially over time and could continue to decrease.]
+
+[1] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-007
+    "In addition, competition from manufacturers of generic drugs, including from generic versions of competitors’ branded products that lose their market exclusivity, is a major challenge for our branded products."
+[2] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-008
+    "In addition, our patented products may face generic or biosimilar competition before patent-based and/or regulatory exclusivity expires, including from “at-risk” launch (despite pending patent infringement litigation against the generic or biosimilar product) by a manufacturer of a generic or biosimilar version of one of our patented products."
+[3] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-011
+    "Furthermore, our recent business development initiatives have been concentrated in certain therapeutic areas — for example, our acquisitions of Metsera and Seagen represent significant investments in obesity and oncology, respectively, which are extremely competitive therapeutic areas."
+[rejected] PFE-2026-02-26-risk_factors-011: quote is not in the passage word for word
+
+grounded=False | tools: search_filings (error), search_filings | qwen2.5:3b, 5 LLM calls, 235.7s

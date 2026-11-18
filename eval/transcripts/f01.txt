@@ -1,0 +1,7 @@
+Q: What does Apple say about its reliance on outsourcing partners to manufacture its products?
+
+Apple does not provide specific details about its reliance on outsourcing partners in its 10-K filings. However, it mentions in its 10-K filings that it relies on a network of suppliers and partners to manufacture its products. This is based on the following passage from the 10-K filings: 
+"Apple relies on a network of suppliers and partners to manufacture its products."
+
+
+grounded=True | tools: none | qwen2.5:3b, 3 LLM calls, 44.6s
