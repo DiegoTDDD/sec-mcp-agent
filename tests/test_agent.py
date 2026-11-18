@@ -52,7 +52,9 @@ async def test_answer_with_a_verified_citation(servers):
 
 
 async def test_model_sees_every_tool_from_both_servers(servers):
-    llm = ScriptedChat([ChatReply(content="ok"), final("No tools needed.")])
+    llm = ScriptedChat(
+        [ChatReply(content="ok"), ChatReply(content="ok"), final("No tools needed.")]
+    )
     await Agent(servers, llm).ask("hi")
     names = {t["function"]["name"] for t in llm.calls[0]["tools"]}
     assert names == {"list_companies", "search_filings", "get_chunk", "score_transaction"}
@@ -121,7 +123,7 @@ async def test_tool_errors_go_back_to_the_model_and_are_recorded(servers):
     )
     answer = await Agent(servers, llm).ask("q")
     tool_msgs = [m["content"] for m in llm.calls[2]["messages"] if m["role"] == "tool"]
-    assert tool_msgs[0].startswith("Error:") and "Unknown ticker" in tool_msgs[0]
+    assert tool_msgs[0].startswith("Error:") and "not in the index" in tool_msgs[0]
     assert "no tool called" in tool_msgs[1]
     assert [(t.tool, t.ok) for t in answer.tool_calls] == [
         ("search_filings", False),
@@ -141,7 +143,7 @@ async def test_fraud_question_uses_the_model_score(servers, fraud_model):
     }
     llm = ScriptedChat(
         [
-            ChatReply(tool_calls=[ToolCallRequest("score_transaction", {"transaction": tx})]),
+            ChatReply(tool_calls=[ToolCallRequest("score_transaction", tx)]),
             ChatReply(content="done"),
             final("Flagged as likely fraud."),
         ]
@@ -160,6 +162,7 @@ async def test_step_limit_stops_a_model_that_never_stops_calling_tools(servers):
 async def test_invalid_json_gets_one_retry_then_falls_back_to_text(servers):
     llm = ScriptedChat(
         [
+            ChatReply(content="done"),
             ChatReply(content="done"),
             ChatReply(content="not json"),
             ChatReply(content="still not json"),
@@ -181,3 +184,21 @@ async def test_repair_round_is_recorded(servers):
     )
     answer = await Agent(servers, llm).ask("q")
     assert answer.repaired and answer.grounded
+
+
+async def test_model_that_skips_tools_is_reminded_once(servers):
+    llm = ScriptedChat([
+        ChatReply(content="From memory: Apple faces tariffs."),
+        search("tariffs", ticker="Apple"),
+        ChatReply(content="done"),
+        lambda m: final("Tariffs.", (first_chunk_id(m), QUOTE)),
+    ])  # fmt: skip
+    answer = await Agent(servers, llm).ask("Apple tariffs?")
+    assert "Do not answer from memory" in llm.calls[1]["messages"][-1]["content"]
+    assert answer.grounded and answer.tool_calls[0].arguments["ticker"] == "Apple"
+
+
+async def test_reminder_is_not_repeated(servers):
+    llm = ScriptedChat([ChatReply(content="no"), ChatReply(content="still no"), final("Unknown.")])
+    answer = await Agent(servers, llm).ask("q")
+    assert answer.tool_calls == [] and answer.llm_calls == 3

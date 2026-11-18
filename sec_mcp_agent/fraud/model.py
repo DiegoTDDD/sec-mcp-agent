@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import math
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -40,6 +41,12 @@ CITY_COORDS = {
 }
 VELOCITY_WINDOW_SECONDS = 300
 NO_PREVIOUS_TX = 99999.0
+
+
+def canonical_city(name: str) -> str:
+    """'São Paulo', 'sao paulo' and 'SAO PAULO' all mean 'Sao Paulo'; unknown names pass through."""
+    folded = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode().lower().strip()
+    return next((c for c in CITY_COORDS if c.lower() == folded), name.strip())
 
 
 def haversine_km(city_a: str, city_b: str) -> float:

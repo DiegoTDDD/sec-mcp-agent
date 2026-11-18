@@ -40,6 +40,9 @@ named) before answering. Search again with other words if the passages do not an
 it is flagged and the top reasons.
 - Never invent facts, numbers or chunk_ids. If the tools do not answer the question, say so."""
 
+TOOL_REMINDER = """Do not answer from memory. Call the tools first: search_filings for questions \
+about companies, score_transaction for transactions. If no tool can help, say so."""
+
 FINAL_INSTRUCTION = """Now write the final answer as JSON with "answer" and "citations". Each \
 citation is {"chunk_id": "<a chunk_id returned by a tool>", "quote": "<one sentence copied word \
 for word from that passage>"}. Cite every passage you rely on. Use an empty list only if you \
@@ -91,10 +94,18 @@ class Agent:
                 {"role": "user", "content": question},
             ]
 
+            reminded = False
             for _ in range(self.max_steps):
                 reply = run.chat(messages, tools=tool_specs)
                 if not reply.tool_calls:
-                    break
+                    if run.records or reminded:
+                        break
+                    # The first eval run: a 3B model sometimes answered from memory without
+                    # calling anything. One reminder, then accept its choice.
+                    reminded = True
+                    messages.append({"role": "assistant", "content": reply.content})
+                    messages.append({"role": "user", "content": TOOL_REMINDER})
+                    continue
                 messages.append(
                     {
                         "role": "assistant",

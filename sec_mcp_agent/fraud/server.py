@@ -14,12 +14,20 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+from typing import Annotated
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp_types import ToolAnnotations
+from pydantic import Field, ValidationError
 
-from sec_mcp_agent.fraud.model import CITY_COORDS, FraudModel, FraudScore, Transaction
+from sec_mcp_agent.fraud.model import (
+    CITY_COORDS,
+    FraudModel,
+    FraudScore,
+    Transaction,
+    canonical_city,
+)
 
 DEFAULT_MODEL_DIR = Path("models/fraud")
 
@@ -34,12 +42,32 @@ def build_server(model: FraudModel) -> MCPServer:
     )
 
     @server.tool(annotations=ToolAnnotations(read_only_hint=True, open_world_hint=False))
-    def score_transaction(transaction: Transaction) -> FraudScore:
+    def score_transaction(
+        card_id: Annotated[str, Field(description="Card identifier, e.g. card_0042")],
+        amount: Annotated[float, Field(gt=0, description="Amount in BRL, e.g. 4850.00")],
+        category: Annotated[str, Field(description="Merchant category, e.g. electronics")],
+        city: Annotated[str, Field(description="City of the purchase, e.g. Manaus")],
+        timestamp: Annotated[str, Field(description="When it happened, ISO 8601")],
+        previous_timestamps: Annotated[
+            list[str] | None,
+            Field(description="Optional: ISO 8601 times of the card's earlier purchases"),
+        ] = None,
+    ) -> FraudScore:
         """Fraud probability for one card transaction, whether it crosses the alert threshold,
         and the features that pushed the score up or down the most."""
+        # Flat arguments: the first eval run showed a 3B model copying a nested object's
+        # JSON schema into the call instead of filling it in.
         try:
+            transaction = Transaction(
+                card_id=card_id,
+                amount=amount,
+                category=category.strip().lower(),
+                city=canonical_city(city),
+                timestamp=timestamp,
+                previous_timestamps=previous_timestamps or [],
+            )
             return model.score(transaction)
-        except ValueError as exc:
+        except (ValueError, ValidationError) as exc:
             raise ToolError(str(exc)) from exc
 
     @server.resource(

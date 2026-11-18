@@ -53,33 +53,46 @@ def main() -> None:
     for ticker in TICKERS:
         try:
             company = Company(ticker)
-            filing = company.get_filings(form="10-K").latest()
-            tenk = filing.obj()
+            # Original 10-Ks only: an amendment (10-K/A) often has no Business, Risk Factors
+            # or MD&A, which is how TSLA dropped out of the first index.
+            filings = list(company.get_filings(form="10-K", amendments=False).head(3))
         except Exception as exc:
             log.warning("%s: skipped (%s)", ticker, exc)
             continue
         name = company.name.title() if company.name.isupper() else company.name
-        for section, getter in SECTIONS.items():
+        for filing in filings:  # newest first; fall back if the parser finds no sections
             try:
-                text = clean(getter(tenk) or "")
-            except Exception:
-                text = ""
-            if len(text) < MIN_SECTION_CHARS:
-                log.warning("%s %s: section missing or too short", ticker, section)
+                tenk = filing.obj()
+            except Exception as exc:
+                log.warning("%s %s: could not parse (%s)", ticker, filing.filing_date, exc)
                 continue
-            new = make_chunks(ticker, name, str(filing.filing_date), section, text)
-            chunks += new
-            manifest.append(
-                {
-                    "ticker": ticker,
-                    "company": name,
-                    "filing_date": str(filing.filing_date),
-                    "accession": filing.accession_number,
-                    "section": section,
-                    "chars": len(text),
-                    "chunks": len(new),
-                }
-            )
+            found = []
+            for section, getter in SECTIONS.items():
+                try:
+                    text = clean(getter(tenk) or "")
+                except Exception:
+                    text = ""
+                if len(text) >= MIN_SECTION_CHARS:
+                    found.append((section, text))
+            if len(found) < 2:
+                log.warning("%s %s: only %d sections found, trying an older filing",
+                            ticker, filing.filing_date, len(found))  # fmt: skip
+                continue
+            for section, text in found:
+                new = make_chunks(ticker, name, str(filing.filing_date), section, text)
+                chunks += new
+                manifest.append(
+                    {
+                        "ticker": ticker,
+                        "company": name,
+                        "filing_date": str(filing.filing_date),
+                        "accession": filing.accession_number,
+                        "section": section,
+                        "chars": len(text),
+                        "chunks": len(new),
+                    }
+                )
+            break
         log.info("%s: %d chunks so far", ticker, len(chunks))
         time.sleep(0.2)  # well under SEC's limit of 10 requests per second
     if not chunks:

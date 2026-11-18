@@ -70,7 +70,8 @@ def score_fraud(q: dict, a: AgentAnswer, model: FraudModel) -> dict[str, Any]:
     exact = False
     for call in calls:
         try:
-            got = Transaction(**call.arguments.get("transaction", call.arguments))
+            args = call.arguments.get("transaction", call.arguments)
+            got = Transaction(**{k: v for k, v in args.items() if v is not None})
         except Exception:
             continue
         exact = exact or got == expected

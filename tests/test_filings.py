@@ -86,11 +86,38 @@ async def test_search_tool_returns_structured_hits(index):
         assert {"chunk_id", "company", "filing_date", "section", "score", "text"} <= set(hits[0])
 
 
+@pytest.mark.parametrize(
+    ("written", "section"),
+    [("RISK FACTORS", "risk_factors"), ("Item 1A. Risk Factors", "risk_factors"),
+     ("MD&A", "mda"), ("Management's Discussion and Analysis", "mda"), ("MDA", "mda"),
+     ("Business", "business"), ("", None), (None, None)],
+)  # fmt: skip
+def test_section_names_models_write_are_understood(written, section):
+    from sec_mcp_agent.filings.server import resolve_section
+
+    assert resolve_section(written) == section
+
+
+async def test_company_names_and_lowercase_tickers_resolve(index):
+    async with Client(build_server(index)) as client:
+        for ticker in ["aapl", "Apple", "apple inc."]:
+            res = await client.call_tool(
+                "search_filings", {"query": "tariffs", "ticker": ticker, "section": "Risk Factors"}
+            )
+            assert not res.is_error
+            assert {h["ticker"] for h in res.structured_content["result"]} == {"AAPL"}
+        bad = await client.call_tool("search_filings", {"query": "x", "section": "R&D"})
+        assert bad.is_error and "risk_factors" in bad.content[0].text
+
+
 async def test_unknown_ticker_is_a_tool_error_the_model_can_read(index):
     async with Client(build_server(index)) as client:
         result = await client.call_tool("search_filings", {"query": "risk", "ticker": "ZZZZ"})
         assert result.is_error
-        assert "Unknown ticker" in result.content[0].text and "AAPL" in result.content[0].text
+        assert (
+            "not in the index" in result.content[0].text
+            and "AAPL (Apple Inc.)" in result.content[0].text
+        )
 
 
 async def test_invalid_arguments_are_rejected(index):

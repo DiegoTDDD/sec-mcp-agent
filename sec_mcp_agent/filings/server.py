@@ -12,8 +12,9 @@ The chunk file comes from SEC_MCP_CHUNKS (default: data/chunks.jsonl).
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
-from typing import Annotated, Literal
+from typing import Annotated
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ResourceError, ToolError
@@ -23,9 +24,42 @@ from pydantic import BaseModel, Field
 from sec_mcp_agent.filings.corpus import SECTION_NAMES, Chunk, load_chunks
 from sec_mcp_agent.filings.search import FilingsIndex, SearchHit
 
-Section = Literal["business", "risk_factors", "mda"]
+SECTIONS = ("business", "risk_factors", "mda")
 READ_ONLY = ToolAnnotations(read_only_hint=True, open_world_hint=False)
 DEFAULT_CHUNKS = Path("data/chunks.jsonl")
+
+
+def resolve_section(value: str | None) -> str | None:
+    """Accept the names models actually write: "Risk Factors", "Item 1A", "MD&A", "Management's
+    Discussion and Analysis", "BUSINESS"... The first eval run showed a strict enum turned most
+    searches into validation errors."""
+    if value is None or not value.strip():
+        return None
+    v = re.sub(r"[^a-z0-9]", "", value.lower())
+    if "risk" in v or v in {"item1a", "1a"}:
+        return "risk_factors"
+    if v.startswith(("mda", "md&a", "management", "discussion")) or v in {"item7", "7"}:
+        return "mda"
+    if v.startswith("business") or v in {"item1", "1"}:
+        return "business"
+    raise ToolError(f"Unknown section {value!r}. Use one of: {', '.join(SECTIONS)}, or omit it.")
+
+
+def resolve_ticker(value: str | None, companies: dict[str, str]) -> str | None:
+    """Accept a ticker in any case or a company name ("Apple", "JPMorgan Chase")."""
+    if value is None or not value.strip():
+        return None
+    v = value.strip().upper()
+    if v in companies:
+        return v
+    norm = re.sub(r"[^a-z0-9]", "", value.lower())
+    for ticker, name in companies.items():
+        if norm and norm in re.sub(r"[^a-z0-9]", "", name.lower()):
+            return ticker
+    raise ToolError(
+        f"{value!r} is not in the index. Companies: "
+        + ", ".join(f"{t} ({n})" for t, n in sorted(companies.items()))
+    )
 
 
 class Company(BaseModel):
@@ -65,20 +99,24 @@ def build_server(index: FilingsIndex) -> MCPServer:
     def search_filings(
         query: Annotated[str, Field(description="What to look for, in plain words")],
         ticker: Annotated[
-            str | None, Field(description="Restrict to one company, e.g. AAPL")
+            str | None, Field(description="Restrict to one company: ticker (AAPL) or name")
         ] = None,
         section: Annotated[
-            Section | None, Field(description="Restrict to one 10-K section")
+            str | None,
+            Field(
+                description="Optional: business, risk_factors or mda. Leave empty to search all."
+            ),
         ] = None,
         k: Annotated[int, Field(ge=1, le=10, description="Number of passages")] = 5,
     ) -> list[SearchHit]:
         """Search 10-K passages by keywords. Returns passages with chunk_id, company, filing
         date, section and text, best match first."""
-        if ticker and ticker.upper() not in index.companies:
-            raise ToolError(
-                f"Unknown ticker {ticker!r}. Known: {', '.join(sorted(index.companies))}"
-            )
-        return index.search(query, k=k, ticker=ticker, section=section)
+        return index.search(
+            query,
+            k=k,
+            ticker=resolve_ticker(ticker, index.companies),
+            section=resolve_section(section),
+        )
 
     @server.tool(annotations=READ_ONLY)
     def get_chunk(

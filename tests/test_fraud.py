@@ -78,18 +78,26 @@ def test_score_flags_the_pattern_and_explains_it_with_the_right_features(fraud_m
     assert reasons.get("amount", 0) > 0 and reasons.get("distance_km_from_home", 0) > 0
 
 
-async def test_server_scores_through_mcp(fraud_model):
+async def test_server_scores_through_mcp_with_flat_arguments(fraud_model):
     async with Client(build_server(fraud_model)) as client:
         tools = (await client.list_tools()).tools
         assert [t.name for t in tools] == ["score_transaction"]
+        props = tools[0].input_schema["properties"]
+        assert set(props) == {
+            "card_id",
+            "amount",
+            "category",
+            "city",
+            "timestamp",
+            "previous_timestamps",
+        }
+        assert "$defs" not in tools[0].input_schema  # nothing nested for the model to copy
         args = {
-            "transaction": {
-                "card_id": "card_0000",
-                "amount": 30,
-                "category": "groceries",
-                "city": fraud_model.home_city["card_0000"],
-                "timestamp": "2026-03-01T14:30:00",
-            }
+            "card_id": "card_0000",
+            "amount": 30,
+            "category": "groceries",
+            "city": fraud_model.home_city["card_0000"],
+            "timestamp": "2026-03-01T14:30:00",
         }
         result = await client.call_tool("score_transaction", args)
         assert not result.is_error
@@ -98,21 +106,36 @@ async def test_server_scores_through_mcp(fraud_model):
         assert score["flagged"] is False
 
 
+async def test_city_and_category_spelling_is_forgiven(fraud_model):
+    async with Client(build_server(fraud_model)) as client:
+        args = {
+            "card_id": "card_0001",
+            "amount": 30,
+            "category": "Groceries",
+            "city": "SÃO PAULO",
+            "timestamp": "2026-03-01T14:30:00",
+        }
+        result = await client.call_tool("score_transaction", args)
+        assert not result.is_error
+
+
 async def test_bad_transaction_is_a_readable_tool_error(fraud_model):
     async with Client(build_server(fraud_model)) as client:
         args = {
-            "transaction": {
-                "card_id": "card_0000",
-                "amount": 30,
-                "category": "casino",
-                "city": "Recife",
-                "timestamp": "2026-03-01T14:30:00",
-            }
+            "card_id": "card_0000",
+            "amount": 30,
+            "category": "casino",
+            "city": "Recife",
+            "timestamp": "2026-03-01T14:30:00",
         }
         result = await client.call_tool("score_transaction", args)
         assert result.is_error and "Unknown category" in result.content[0].text
-        negative = dict(args["transaction"], category="groceries", amount=-5)
-        assert (await client.call_tool("score_transaction", {"transaction": negative})).is_error
+        bad_city = await client.call_tool(
+            "score_transaction", dict(args, category="fuel", city="Lisbon")
+        )
+        assert bad_city.is_error and "Unknown city" in bad_city.content[0].text
+        negative = dict(args, category="groceries", amount=-5)
+        assert (await client.call_tool("score_transaction", negative)).is_error
 
 
 async def test_model_card_resource(fraud_model):
