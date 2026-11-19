@@ -49,12 +49,22 @@ class OllamaChat:
         temperature: float = 0.0,
         num_ctx: int = 8192,
         seed: int = 0,
+        max_tokens: int = 768,
+        timeout_s: float = 240.0,
     ) -> None:
         import ollama
 
         self.name = model or os.environ.get("SEC_MCP_MODEL", "qwen2.5:3b")
-        self._client = ollama.Client(host=host or os.environ.get("OLLAMA_HOST"))
-        self._options = {"temperature": temperature, "num_ctx": num_ctx, "seed": seed}
+        # Both limits come from the second eval run: one JSON-constrained reply never ended
+        # and held the runner for 2.5 hours. num_predict caps the reply, the HTTP timeout
+        # caps the wait.
+        self._client = ollama.Client(host=host or os.environ.get("OLLAMA_HOST"), timeout=timeout_s)
+        self._options = {
+            "temperature": temperature,
+            "num_ctx": num_ctx,
+            "seed": seed,
+            "num_predict": max_tokens,
+        }
 
     def chat(
         self, messages: list[Message], tools: list[dict] | None = None, schema: dict | None = None

@@ -85,21 +85,35 @@ def score_fraud(q: dict, a: AgentAnswer, model: FraudModel) -> dict[str, Any]:
     }
 
 
+def failed_row(q: dict, exc: Exception, seconds: float) -> dict[str, Any]:
+    return {
+        "id": q["id"], "type": q["type"],
+        "score": {"passed": False, "error": f"{type(exc).__name__}: {str(exc)[:200]}"},
+        "seconds": round(seconds, 1), "tools": "-", "tool_calls": 0, "citations": 0,
+        "rejected_citations": 0, "repaired": False, "llm_calls": 0,
+        "prompt_tokens": 0, "completion_tokens": 0, "answer": None,
+    }  # fmt: skip
+
+
 def summarize(rows: list[dict]) -> dict[str, Any]:
     def rate(kind: str, key: str) -> float | None:
         vals = [
-            r["score"][key] for r in rows if r["type"] == kind and r["score"].get(key) is not None
+            r["score"].get(key, False if "error" in r["score"] else None)
+            for r in rows
+            if r["type"] == kind
         ]
+        vals = [v for v in vals if v is not None]
         return round(sum(bool(v) for v in vals) / len(vals), 3) if vals else None
 
     filings = [r for r in rows if r["type"] == "filings"]
     on_target = [
         r["score"]["citations_on_target"]
         for r in filings
-        if r["score"]["citations_on_target"] is not None
+        if r["score"].get("citations_on_target") is not None
     ]
     return {
         "questions": len(rows),
+        "errors": sum("error" in r["score"] for r in rows),
         "passed": sum(r["score"]["passed"] for r in rows),
         "filings_pass_rate": rate("filings", "passed"),
         "searched_company_rate": rate("filings", "searched_company"),
@@ -111,7 +125,7 @@ def summarize(rows: list[dict]) -> dict[str, Any]:
         "out_of_scope_pass_rate": rate("out_of_scope", "passed"),
         "fraud_exact_arguments_rate": rate("fraud", "exact_arguments"),
         "median_seconds": round(statistics.median(r["seconds"] for r in rows), 1),
-        "p90_seconds": round(sorted(r["seconds"] for r in rows)[int(0.9 * (len(rows) - 1))], 1),
+        "p90_seconds": round(sorted(r["seconds"] for r in rows)[round(0.9 * (len(rows) - 1))], 1),
         "mean_tool_calls": round(statistics.mean(r["tool_calls"] for r in rows), 2),
         "total_tokens": sum(r["prompt_tokens"] + r["completion_tokens"] for r in rows),
     }
@@ -122,7 +136,8 @@ def write_markdown(summary: dict, rows: list[dict], model: str, path: Path) -> N
     lines = [
         "# Agent evaluation", "",
         f"Model `{model}` served by Ollama on a CPU-only GitHub Actions runner, temperature 0. "
-        f"{summary['questions']} questions; {summary['passed']} passed.", "",
+        f"{summary['questions']} questions; {summary['passed']} passed; "
+        f"{summary['errors']} did not finish (model timeout or error).", "",
         "| Metric | Value |", "| --- | --- |",
         f"| Filings questions passed (right company, verified citations, expected evidence) | {pct(summary['filings_pass_rate'])} |",
         f"| Searched the right company | {pct(summary['searched_company_rate'])} |",
@@ -164,7 +179,15 @@ async def run(args: argparse.Namespace) -> None:
     rows = []
     for q in questions:
         t0 = time.perf_counter()
-        answer = await agent.ask(q["question"])
+        try:
+            answer = await agent.ask(q["question"])
+        except Exception as exc:  # a timeout or crash fails one question, not the run
+            rows.append(failed_row(q, exc, time.perf_counter() - t0))
+            (transcripts / f"{q['id']}.txt").write_text(
+                f"Q: {q['question']}\n\nFAILED: {type(exc).__name__}: {exc}\n", encoding="utf-8"
+            )
+            print(f"{q['id']}: FAILED {type(exc).__name__} {rows[-1]['seconds']}s", flush=True)
+            continue
         if q["type"] == "filings":
             score = score_filings(q, answer, index)
         elif q["type"] == "out_of_scope":
