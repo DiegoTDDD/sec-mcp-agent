@@ -97,8 +97,20 @@ def detect_company(query: str, companies: dict[str, str]) -> str | None:
 
 
 def resolve_company(query: str, ticker: str | None, companies: dict[str, str]) -> str | None:
-    """The ticker filter search_filings applies: the explicit one, else one named in the query."""
-    return resolve_ticker(ticker, companies) or detect_company(query, companies)
+    """The ticker filter search_filings applies: the explicit one, else one named in the query.
+
+    A wrong ticker for a company the query names unambiguously is corrected: the traces in
+    llm-evals-observability showed the model sending "UHG" for "UnitedHealth Group medical cost
+    trends" (the ticker is UNH). A ticker for a company that is not indexed still fails, with the
+    list of companies, so the agent says the filings do not cover it.
+    """
+    try:
+        return resolve_ticker(ticker, companies) or detect_company(query, companies)
+    except ToolError:
+        named = detect_company(query, companies)
+        if named is None:
+            raise
+        return named
 
 
 class Company(BaseModel):

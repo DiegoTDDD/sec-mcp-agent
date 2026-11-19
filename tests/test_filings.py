@@ -185,3 +185,14 @@ def test_detect_company_ignores_generic_words_and_single_letter_tickers():
     assert detect_company("metadata retention", companies) is None
     assert detect_company("Bank of America deposits", companies) == "BAC"
     assert detect_company("visa fees", companies) == "V"
+
+
+async def test_wrong_ticker_is_corrected_when_the_query_names_the_company(index):
+    async with Client(build_server(index)) as client:
+        res = await client.call_tool(
+            "search_filings", {"query": "JPMorgan interest rates", "ticker": "JPMC"}
+        )
+        assert not res.is_error
+        assert {h["ticker"] for h in res.structured_content["result"]} == {"JPM"}
+        toyota = await client.call_tool("search_filings", {"query": "Toyota risks", "ticker": "TM"})
+        assert toyota.is_error and "not in the index" in toyota.content[0].text
