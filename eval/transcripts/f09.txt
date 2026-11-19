@@ -1,0 +1,8 @@
+Q: Who does Netflix say it competes with for members' entertainment time?
+
+Netflix says it competes with other companies that manufacture and sell products that treat or prevent diseases or indications similar to those treated or prevented by its major products. These competitors include other worldwide research-based biopharmaceutical companies, smaller research companies with more limited therapeutic focus and generic drug and biosimilar manufacturers.
+
+[1] Pfizer Inc (PFE) 10-K 2026-02-26, business, PFE-2026-02-26-business-041
+    "We compete with other companies that manufacture and sell products that treat or prevent diseases or indications similar to those treated or prevented by our major products."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 4 LLM calls, 116.8s

@@ -162,6 +162,33 @@
   "chunks": 62
  },
  {
+  "ticker": "TSLA",
+  "company": "Tesla, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003952",
+  "section": "business",
+  "chars": 45453,
+  "chunks": 49
+ },
+ {
+  "ticker": "TSLA",
+  "company": "Tesla, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003952",
+  "section": "risk_factors",
+  "chars": 83656,
+  "chunks": 94
+ },
+ {
+  "ticker": "TSLA",
+  "company": "Tesla, Inc.",
+  "filing_date": "2026-01-29",
+  "accession": "0001628280-26-003952",
+  "section": "mda",
+  "chars": 55401,
+  "chunks": 59
+ },
+ {
   "ticker": "JPM",
   "company": "Jpmorgan Chase & Co",
   "filing_date": "2026-02-13",

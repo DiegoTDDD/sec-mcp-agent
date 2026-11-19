@@ -1,0 +1,14 @@
+Q: How does JPMorgan Chase describe its cybersecurity risk?
+
+JPMorgan Chase & Co. describes its cybersecurity risk as evolving techniques used in cyber attacks, the possibility of third-party access to internal networks, and the potential for disruption or damage to its systems and those of its clients, customers, and counterparties. The company also faces risks such as misappropriation of confidential information, financial loss, and reputational harm. Additionally, the company faces risks related to liquidity and capital, and the integration of acquired businesses, including system integration and the strengthening of network security.
+
+[1] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, risk_factors, JPM-2026-02-13-risk_factors-066
+    "the techniques used in cyber attacks evolve frequently and increase in sophistication, and therefore a cyber attack may not be recognized until launched or may go undetected for extended periods"
+[2] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, risk_factors, JPM-2026-02-13-risk_factors-070
+    "misappropriation of confidential information of JPMorganChase or that of its clients, customers, counterparties, employees, regulators or other parties"
+[3] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, risk_factors, JPM-2026-02-13-risk_factors-069
+    "the continuing migration of technology systems of customer and client-facing services, including digital banking and other internet-based products, to the cloud, and modernization of those services"
+[4] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, risk_factors, JPM-2026-02-13-risk_factors-052
+    "The Parent Company, JPMorgan Chase & Co., is a holding company that holds the stock of JPMorgan Chase Bank, N.A. and an intermediate holding company, JPMorgan Chase Holdings LLC (the “IHC”). In addition to holding the stock of other JPMorganChase subsidiaries, the IHC owns other assets and provides intercompany lending to the Parent Company."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 154.1s

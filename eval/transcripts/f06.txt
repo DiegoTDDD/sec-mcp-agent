@@ -1,0 +1,10 @@
+Q: What does Pfizer say about patent expirations and loss of exclusivity?
+
+Pfizer Inc. mentions that certain of their products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets, leading to generic competition and a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030. They also highlight that competition from manufacturers of generic drugs, including from generic versions of competitors’ branded products that lose their market exclusivity, is a major challenge for their branded products.
+
+[1] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-011
+    "In particular, certain of our products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and we expect certain products to face new or increased generic competition over the next few years."
+[2] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-053
+    "Claims against our patents include challenges to the coverage and/or validity of our patents on various products or processes. There can be no assurance as to the outcome of these matters, and a loss in any of these cases could result in a loss of patent protection for the product at issue, which could lead to a significant loss of sales of that product and could materially affect future results of operations."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 5 LLM calls, 184.0s

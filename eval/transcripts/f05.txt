@@ -1,0 +1,6 @@
+Q: How could climate change regulation affect Exxon Mobil's business, according to its 10-K?
+
+According to the 10-K filings, Exxon Mobil Corporation is expanding the scope of investments in lower-emission energy and emission-reduction services and technologies. The filings also mention that the energy and petrochemical industries are highly competitive, both within the industries and also with other industries in supplying the energy, fuel, and chemical needs of industrial and individual consumers. ExxonMobil competes with other firms in the sale or purchase of needed goods and services in many national and international markets and employs all methods of competition which are lawful and appropriate for such purposes. ExxonMobil aims to lower the carbon intensity of its oil and gas operations and comply with the related laws and regulations to which it is subject. The filings also indicate that ExxonMobil is aware of climate change regulations and is taking steps to adapt to these regulations.
+
+
+grounded=False | tools: search_filings | qwen2.5:3b, 4 LLM calls, 123.2s

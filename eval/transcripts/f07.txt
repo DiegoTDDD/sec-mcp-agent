@@ -1,0 +1,14 @@
+Q: How does Coca-Cola describe its operating segments?
+
+Coca-Cola Co (KO) describes its operating segments primarily based on geographic responsibility, which is consistent with the way management runs its business. The operating segments are generally subdivided into smaller geographic regions, which are reporting units. The Bottling Investments operating segment includes all of its consolidated bottling operations, regardless of geographic location, and each consolidated bottling operation within the Bottling Investments operating segment is its own reporting unit. Goodwill is assigned to the reporting unit or units that benefit from the synergies arising from each business combination.
+
+[1] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-024
+    "We perform impairment tests of goodwill at our reporting unit level, which is generally one level below our operating segments. Our operating segments are primarily based on geographic responsibility, which is consistent with the way management runs our business."
+[2] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-062
+    "The percentage contribution of each operating segment fluctuates over time due to net operating revenues in some operating segments growing at a faster rate compared to other operating segments."
+[3] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-048
+    "In January, February and December 2024, as well as May 2025, the Company refranchised our bottling operations in certain territories in India, and in February 2024, the Company refranchised our bottling operations in Bangladesh and the Philippines. The impact of each of these refranchisings has been included as a structural change in our analysis of net operating revenues on a consolidated basis as well as for the Bottling Investments and Asia Pacific operating segments."
+[4] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-056
+    "1Represents the percent change in net operating revenues attributable to the increase (decrease) in concentrate sales volume for our geographic operating segments (expressed in unit case equivalents) after considering the impact of acquisitions and divestitures, if any. For our Bottling Investments operating segment, this represents the percent change in net operating revenues attributable to the increase (decrease) in unit case volume after considering the impact of structural changes, if any."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 4 LLM calls, 142.3s

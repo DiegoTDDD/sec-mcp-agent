@@ -1,0 +1,10 @@
+Q: What does Visa say about interchange fee regulation or litigation?
+
+Visa Inc. mentions that the European Union's Interchange Fee Regulation caps consumer credit and debit IRFs for transactions within the EEA. Additionally, Visa is taking actions to revisit its regulations that implement aspects of the Dodd-Frank Act, including requiring issuers to ensure dual-network availability for ecommerce debit transactions and proposing further rate reductions with automatic biennial adjustments. Visa also faces regulatory interest in cross-border interchange rates, with some jurisdictions adopting or proposing cross-border interchange caps or cross-border MDR regulations.
+
+[1] Visa Inc. (V) 10-K 2026-11-05, risk_factors, V-2026-11-05-risk_factors-006
+    "EU’s Interchange Fee Regulation caps consumer credit and debit IRFs for transactions within the EEA. Member states may impose further reductions, and the European Commission (EC) may periodically reassess Interchange Fee Regulations, which could further lower caps or expand regulation to additional products, services and fees."
+[2] Visa Inc. (V) 10-K 2026-11-05, risk_factors, V-2026-11-05-risk_factors-005
+    "taken actions to revisit its regulations that implement these aspects of the Dodd-Frank Act, including requiring issuers to ensure dual-network availability for ecommerce debit transactions and proposing further rate reductions with automatic biennial adjustments."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 166.7s

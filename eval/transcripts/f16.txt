@@ -1,0 +1,6 @@
+Q: What does Chevron say about the volatility of crude oil prices?
+
+Chevron Corp (CVX) states in its 10-K filing that it is primarily in a commodities business that has a history of price volatility. The most significant factor affecting the company’s results of operations is the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by various factors including general economic conditions, industry production and inventory levels, technology advancements, geopolitical risks, and governmental regulations.
+
+
+grounded=False | tools: search_filings | qwen2.5:3b, 4 LLM calls, 128.4s

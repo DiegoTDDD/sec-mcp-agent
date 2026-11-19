@@ -1,0 +1,6 @@
+Q: What does Boeing say about 737 production and quality?
+
+Boeing Co (BA) says in its 10-K filed on 2026-01-30 that it is a leading producer of commercial aircraft and offers a family of commercial jetliners designed to meet a broad spectrum of global passenger and cargo requirements of airlines. The 737 program may only increase production rates and/or implement new production lines with the concurrence of the FAA. Boeing maintains an extensive qualification and performance surveillance system to control risk associated with such reliance on third parties, and failure of suppliers or subcontractors to meet commitments has and could continue to adversely affect product quality, production schedules and program/contract profitability.
+
+
+grounded=False | tools: search_filings | qwen2.5:3b, 4 LLM calls, 174.3s
