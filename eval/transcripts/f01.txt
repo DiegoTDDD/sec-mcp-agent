@@ -1,0 +1,8 @@
+Q: What does Apple say about its reliance on outsourcing partners to manufacture its products?
+
+Apple Inc. utilizes several outsourcing partners to manufacture subassemblies for the Company’s products and to perform final assembly and testing of finished products. The Company also obtains individual components for its products from a wide variety of individual suppliers.
+
+[1] Apple Inc. (AAPL) 10-K 2026-11-03, mda, AAPL-2026-11-03-mda-011
+    "The Company utilizes several outsourcing partners to manufacture subassemblies for the Company’s products and to perform final assembly and testing of finished products."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 55.5s

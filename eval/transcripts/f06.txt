@@ -1,0 +1,12 @@
+Q: What does Pfizer say about patent expirations and loss of exclusivity?
+
+Pfizer Inc. mentions that certain of their products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and they expect certain products to face new or increased generic competition over the next few years. They anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of their in-line products experience these expirations. Pfizer also notes that competition from manufacturers of generic drugs, including from generic versions of competitors’ branded products that lose their market exclusivity, is a major challenge for their branded products.
+
+[1] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-011
+    "In particular, certain of our products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and we expect certain products to face new or increased generic competition over the next few years."
+[2] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-007
+    "We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations, with the rate of the reduction of revenues from patent-based or regulatory exclusivity expiries expected to significantly accelerate over the next few years."
+[3] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-061
+    "The scope of our patent claims also may vary between countries, as individual countries have distinct patent laws, and our ability to enforce our patents depends on the laws of each country, its enforcement practices, and the extent to which certain countries engage in policies or practices that weaken a country’s intellectual property framework (e.g., laws or regulations that promote or provide broad discretion to issue a compulsory license)."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 70.8s

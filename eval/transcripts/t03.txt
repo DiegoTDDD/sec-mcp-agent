@@ -1,0 +1,9 @@
+Q: Card card_0003 made fuel purchases in Curitiba at 2026-03-01T10:00:00, 10:00:20, 10:00:41 and 10:01:02, and now another of R$ 3.50 at 2026-03-01T10:01:25. Score the latest one, using the earlier times as the card's history.
+
+0.180166
+
+[rejected] 1: chunk_id was not returned by any tool
+[rejected] 2: chunk_id was not returned by any tool
+[fraud model] p=0.180 flagged=False threshold=0.563; amount=3.5 (+7.93), category_entertainment=0 (-7.35), distance_km_from_home=0 (-1.50)
+
+grounded=False | tools: score_transaction | qwen2.5:3b, 4 LLM calls, 78.5s

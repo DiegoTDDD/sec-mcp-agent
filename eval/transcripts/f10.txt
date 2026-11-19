@@ -1,0 +1,16 @@
+Q: What does Boeing say about 737 production and quality?
+
+Boeing Co (BA) in its 10-K filing mentions that in the U.S., their commercial aircraft products are required to comply with FAA regulations governing production and quality systems, airworthiness and installation approvals, repair procedures and continuing operational safety. Additionally, the 737-9 door plug accident in January 2024 led to an investigation by the FAA into the 737 quality control system, including additional requirements and restrictions. Boeing also slowed production rates and delayed planned production rate increases to address these issues, impacting their financial position, results of operations, and cash flows during 2024 and 2025.
+
+[1] Boeing Co (BA) 10-K 2026-01-30, business, BA-2026-01-30-business-011
+    "In the U.S., our commercial aircraft products are required to comply with FAA regulations governing production and quality systems, airworthiness and installation approvals, repair procedures and continuing operational safety."
+[2] Boeing Co (BA) 10-K 2026-01-30, mda, BA-2026-01-30-mda-002
+    "On January 5, 2024, a 737-9 flight made an emergency landing after a mid-exit door plug detached in flight. As a result of the accident, the Federal Aviation Administration (FAA) performed an investigation into the 737 quality control system and imposed certain additional requirements and restrictions."
+[3] Boeing Co (BA) 10-K 2026-01-30, mda, BA-2026-01-30-mda-087
+    "Factors that influence these estimates include the timing of production rate increases, internal and supplier performance trends, production quality, labor instability, supply chain delays and quality issues, learning curve, change incorporation, rework or safety enhancements, regulatory requirements, flight test and certification requirements and schedules, performance or reliability issues involving completed aircraft, customer and/or supplier claims or assertions, asset utilization, anticipated labor agreements, and inflationary or deflationary trends."
+[4] Boeing Co (BA) 10-K 2026-01-30, mda, BA-2026-01-30-mda-038
+    "*Approximate undelivered orders by minor model in 2025, 2024 and 2023, respectively: 737-7 (6%, 7%, 7%), 737-8 (60%, 63%, 65%), 737-9 (5%, 5%, 3%) and 737-10 (29%, 25%, 25%)."
+[5] Boeing Co (BA) 10-K 2026-01-30, risk_factors, BA-2026-01-30-risk_factors-010
+    "For example, as part of our plan to improve safety and quality and to address the issues identified by the FAA following the 737-9 door plug accident in January 2024, we slowed 737 production rates and delayed planned production rate increases to reduce traveled work in our factory and at our suppliers."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 4 LLM calls, 102.8s

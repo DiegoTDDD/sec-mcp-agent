@@ -1,0 +1,8 @@
+Q: How does Coca-Cola describe its operating segments?
+
+Coca-Cola describes its operating segments in the 10-K filing of February 20, 2026, which includes geographic operating segments such as EMEA, Africa, and Europe. The filing details the growth in unit case volume for these segments, with specific mentions of Trademark Coca-Cola, sparkling flavors, water, sports, coffee and tea, and energy drinks. For example, in the EMEA operating unit, there was a 7% growth in unit case volume, and in the Africa operating unit, there was a 3% growth. The filing also notes that the Europe operating unit had a 1% decline in unit case volume, which was partially offset by growth in energy drinks.
+
+[1] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-053
+    "Unit case volume in EMEA increased 3%, which included 2% growth in Trademark Coca-Cola, 3% growth in sparkling flavors, 2% growth in water, sports, coffee and tea as well as growth in energy drinks, partially offset by a 4% decline in juice, value-added dairy and plant-based beverages. The operating segment reported growth in unit case volume of 7% in the Eurasia and Middle East operating unit, growth of 3% in the Africa operating unit and growth in energy drinks, partially offset by a decline of 1% in the Europe operating unit."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 4 LLM calls, 66.6s

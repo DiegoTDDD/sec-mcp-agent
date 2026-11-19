@@ -1,0 +1,12 @@
+Q: What risks does Tesla describe about ramping up vehicle production?
+
+Tesla, in their 10-K filing, describes risks related to ramping up vehicle production, including supply chain risks and the need to maintain close relationships with key partners that supply battery cells, electronics, and complex vehicle assemblies. They also mention the risk of disruptions in supply from these single suppliers and the need to qualify multiple suppliers for key components to minimize production risks. Additionally, they highlight the importance of maintaining safety stock for key parts and assemblies and die banks for components with lengthy procurement lead times. Tesla also addresses the need to develop and retain excellent talent through their human capital management strategy, which includes recruiting, developing, and retaining talent.
+
+[1] Tesla, Inc. (TSLA) 10-K 2026-01-29, business, TSLA-2026-01-29-business-021
+    "We currently have manufacturing facilities in the U.S. in California, New York, Texas and Nevada. At these facilities, we manufacture and assemble, among other things, vehicles, certain vehicle parts and components, such as our battery packs and battery cells, energy storage components and systems and solar products and components."
+[2] Tesla, Inc. (TSLA) 10-K 2026-01-29, business, TSLA-2026-01-29-business-022
+    "Our products use parts sourced from thousands of suppliers globally. We have developed close relationships with key partners that supply battery cells, electronics and complex vehicle assemblies."
+[3] Tesla, Inc. (TSLA) 10-K 2026-01-29, business, TSLA-2026-01-29-business-047
+    "The Committee directly interacts and engages with members of Tesla’s management, including members from the human resources, compliance and legal teams to review and evaluate people-related initiatives, employee feedback, risks and opportunities."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 69.5s

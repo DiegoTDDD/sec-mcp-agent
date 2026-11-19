@@ -1,0 +1,8 @@
+Q: How many associates does Walmart employ?
+
+Walmart employs approximately 2.1 million associates worldwide, with approximately 1.6 million associates in the U.S.
+
+[1] Walmart Inc. (WMT) 10-K 2026-03-13, business, WMT-2026-03-13-business-028
+    "Our business is focused on serving people and this is delivered by our approximately 2.1 million associates around the world with approximately 1.6 million associates in the U.S. and approximately 0.5 million associates internationally."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 32.4s
