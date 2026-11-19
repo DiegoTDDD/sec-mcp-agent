@@ -1,0 +1,12 @@
+Q: What does Chevron say about the volatility of crude oil prices?
+
+Chevron Corp (CVX) states in its 10-K filing that it is primarily in a commodities business that has a history of price volatility. The most significant factor affecting the company’s results of operations is the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by various factors including general economic conditions, industry production and inventory levels, technology advancements, geopolitical risks, and governmental regulations. The company evaluates the risk of changing commodity prices as a core part of its business planning process. An investment in the company carries significant exposure to fluctuations in global prices of crude oil, natural gas, and natural gas liquids.
+
+[1] Chevron Corp (CVX) 10-K 2026-02-24, risk_factors, CVX-2026-02-24-risk_factors-001
+    "The most significant factor that affects the company’s results of operations are the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by general economic conditions and level of economic growth, including low or negative growth; industry production and inventory levels; technology advancements, including those in pursuit of a lower carbon economy; production quotas or other actions that might be imposed by the Organization of Petroleum Exporting Countries or other producers; weather-related damage and disruptions due to other natural or human causes beyond our control; competing fuel prices; geopolitical risks; the pace of energy transition; customer and"
+[2] Chevron Corp (CVX) 10-K 2026-02-24, risk_factors, CVX-2026-02-24-risk_factors-002
+    "Chevron evaluates the risk of changing commodity prices as a core part of its business planning process. An investment in the company carries significant exposure to fluctuations in global prices of crude oil, natural gas, and natural gas liquids."
+[3] Chevron Corp (CVX) 10-K 2026-02-24, risk_factors, CVX-2026-02-24-risk_factors-005
+    "Creating and maintaining an inventory of economic projects depends on many factors, including obtaining and renewing rights to explore, develop and produce hydrocarbons; drilling success; reservoir optimization; technology advancements; ability to bring long-lead-time, capital-intensive projects to completion on budget and on schedule; partner alignment, including strategic support; and efficient and profitable operation of mature properties."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 151.9s

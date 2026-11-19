@@ -1,0 +1,14 @@
+Q: How does Coca-Cola describe its operating segments?
+
+Coca-Cola Co (KO) describes its operating segments based on geographic responsibility, which is consistent with the way management runs the business. The company's geographic operating segments are generally subdivided into smaller geographic regions, which are reporting units. The operating segments include North America, EMEA (Eurasia and Middle East), Latin America, Asia Pacific, and Bottling Investments. Each consolidated bottling operation within the Bottling Investments operating segment is its own reporting unit.
+
+[1] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-053
+    "The operating segment reported growth in unit case volume of 7% in the Eurasia and Middle East operating unit, growth of 3% in the Africa operating unit and growth in energy drinks, partially offset by a decline of 1% in the Europe operating unit."
+[2] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-052
+    "Geographic operating segment data reflects unit case volume growth for all bottlers, both consolidated and unconsolidated, and distributors in the applicable geographic areas."
+[3] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-054
+    "Unit case volume in North America decreased 1%, which included a 1% decline in Trademark Coca-Cola, a 2% decline in juice, value-added dairy and plant-based beverages and a 1% decline in sparkling flavors, partially offset by growth in energy drinks."
+[4] Coca Cola Co (KO) 10-K 2026-02-20, mda, KO-2026-02-20-mda-024
+    "Our geographic operating segments are generally subdivided into smaller geographic regions, which are reporting units."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 186.2s

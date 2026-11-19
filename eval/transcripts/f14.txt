@@ -1,0 +1,6 @@
+Q: What does Visa say about interchange fee regulation or litigation?
+
+["V-2026-11-05-risk_factors-006", "V-2026-11-05-risk_factors-005", "V-2026-11-05-mda-005", "V-2026-11-05-business-077"]
+
+
+grounded=False | tools: search_filings | qwen2.5:3b, 4 LLM calls, 240.9s

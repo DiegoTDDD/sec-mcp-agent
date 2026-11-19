@@ -1,0 +1,6 @@
+Q: What does Starbucks say about coffee bean prices in its 10-K?
+
+It seems that the ticker 'SBUX' for Starbucks is not in our index. Let's try searching with the company name instead.
+
+
+grounded=False | tools: search_filings (error), search_filings (error) | qwen2.5:3b, 4 LLM calls, 62.2s

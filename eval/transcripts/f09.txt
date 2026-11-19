@@ -1,0 +1,8 @@
+Q: Who does Netflix say it competes with for members' entertainment time?
+
+Netflix, Inc. says it competes with other entertainment services that offer TV series, films, games, and live programming across a wide variety of genres and languages. The company aims to continuously improve its members' experience by offering compelling content that delights them and attracts new members.
+
+[1] Netflix Inc (NFLX) 10-K 2026-01-23, business, NFLX-2026-01-23-business-000
+    "(“Netflix”, the “Company”, “registrant”, “we”, or “us”) is one of the world’s leading entertainment services offering TV series, films, games and live programming across a wide variety of genres and languages."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 4 LLM calls, 105.8s

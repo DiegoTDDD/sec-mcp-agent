@@ -1,0 +1,1626 @@
+{
+ "model": "qwen2.5:3b",
+ "summary": {
+  "questions": 22,
+  "errors": 0,
+  "passed": 11,
+  "filings_pass_rate": 0.438,
+  "searched_company_rate": 1.0,
+  "grounded_rate": 0.5,
+  "evidence_rate": 0.438,
+  "citation_precision": 1.0,
+  "rejected_citations": 17,
+  "repaired_answers": 4,
+  "quotes_from_model": 22,
+  "quotes_selected": 5,
+  "out_of_scope_pass_rate": 0.5,
+  "fraud_exact_arguments_rate": 0.75,
+  "median_seconds": 151.9,
+  "p90_seconds": 288.7,
+  "mean_tool_calls": 1.14,
+  "total_tokens": 117276
+ },
+ "rows": [
+  {
+   "id": "f01",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 151.8,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 1,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 4328,
+   "completion_tokens": 273,
+   "answer": {
+    "question": "What does Apple say about its reliance on outsourcing partners to manufacture its products?",
+    "answer": "Apple Inc. utilizes several outsourcing partners to manufacture subassemblies for the Company\u2019s products and to perform final assembly and testing of finished products. The Company also obtains individual components for its products from a wide variety of individual suppliers.",
+    "citations": [
+     {
+      "chunk_id": "AAPL-2026-11-03-mda-011",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "mda",
+      "quote": "The Company utilizes several outsourcing partners to manufacture subassemblies for the Company\u2019s products and to perform final assembly and testing of finished products.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Apple outsourcing",
+       "ticker": "AAPL",
+       "section": "mda"
+      },
+      "ok": true,
+      "seconds": 0.046,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 4328,
+    "completion_tokens": 273,
+    "seconds": 151.82
+   }
+  },
+  {
+   "id": "f02",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 124.1,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 4359,
+   "completion_tokens": 435,
+   "answer": {
+    "question": "What does NVIDIA report about US export controls and their effect on its sales?",
+    "answer": "NVIDIA reports that US export controls have impacted and may in the future impact demand for their products or services, negatively impacting their business and financial results. These controls have led to excess inventory or caused supply charges, disrupted their supply and distribution chain, and have a disproportionate impact on NVIDIA, creating a competitive disadvantage. Additionally, export controls have encouraged customers outside China and other impacted regions to 'design-out' certain U.S. semiconductors from their products to reduce the compliance burden and risk, and to ensure they are able to serve markets worldwide. Export controls have also encouraged overseas governments to request that their customers purchase from competitors rather than NVIDIA or other U.S. firms, harming their business, market position, and financial results.",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "section": "risk_factors",
+       "query": "US export controls sales",
+       "ticker": "NVDA"
+      },
+      "ok": true,
+      "seconds": 0.017,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 4359,
+    "completion_tokens": 435,
+    "seconds": 124.12
+   }
+  },
+  {
+   "id": "f03",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 131.5,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 3,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 3481,
+   "completion_tokens": 573,
+   "answer": {
+    "question": "What risks does Tesla describe about ramping up vehicle production?",
+    "answer": "Tesla, in their 10-K filing, describes risks associated with ramping up vehicle production, including the need to expand production capacity at their existing facilities to increase cost-competitiveness in significant markets. They also mention the risk of disruptions in supply from single suppliers for certain key components, and the need to maintain safety stock and die banks for components with lengthy procurement lead times. Additionally, they highlight the importance of managing risks related to their human capital management strategy, including talent recruitment, development, and retention.",
+    "citations": [
+     {
+      "chunk_id": "TSLA-2026-01-29-business-021",
+      "ticker": "TSLA",
+      "company": "Tesla, Inc.",
+      "filing_date": "2026-01-29",
+      "section": "business",
+      "quote": "Generally, we continue to expand production capacity at our existing facilities, and strive to increase cost-competitiveness in our significant markets by strategically adding local manufacturing, including through partnerships with suppliers.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "TSLA-2026-01-29-business-022",
+      "ticker": "TSLA",
+      "company": "Tesla, Inc.",
+      "filing_date": "2026-01-29",
+      "section": "business",
+      "quote": "Where multiple sources are available for certain key components, we work to qualify multiple suppliers for them where it is sensible to do so in order to minimize potential production risks due to disruptions in their supply.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "TSLA-2026-01-29-business-047",
+      "ticker": "TSLA",
+      "company": "Tesla, Inc.",
+      "filing_date": "2026-01-29",
+      "section": "business",
+      "quote": "The Committee also monitors developments in human capital management practices and recommends revisions to Company policies and practices as appropriate.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Tesla production ramp",
+       "section": "business",
+       "ticker": "TSLA"
+      },
+      "ok": true,
+      "seconds": 0.011,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 3481,
+    "completion_tokens": 573,
+    "seconds": 131.5
+   }
+  },
+  {
+   "id": "f04",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 285.5,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 5758,
+   "completion_tokens": 1823,
+   "answer": {
+    "question": "How does JPMorgan Chase describe its cybersecurity risk?",
+    "answer": "[{\"chunk_id\": \"JPM-2026-02-13-mda-341\", \"quote\": \"The governance structure for the Global Cybersecurity and Technology Controls organization is designed to appropriately identify, escalate and mitigate cybersecurity risks.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-337\", \"quote\": \"The Global Chief Information Security Officer (\u201cCISO\u201d) reports to the Global Chief Information Officer, and is a member of key cybersecurity governance forums.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-336\", \"quote\": \"Risks from cybersecurity threats, including any previous cybersecurity events, have not materially affected the Firm or its business strategy, results of operations or financial condition.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-343\", \"quote\": \"As part of its oversight of management\u2019s implementation and maintenance of the Firm\u2019s risk management framework, the Firm\u2019s Board of Directors receives periodic updates from the CIO, the CISO and senior members of the CTOC concerning cybersecurity matters.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-335\", \"quote\": \"Third parties with which the Firm does business, that facilitate the Firm\u2019s business activities (e.g., vendors, supply chain, exchanges, clearing houses, central depositories, and financial intermediaries) or that the Firm has acquired are also sources of cybersecurity risk to the Firm.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-335\", \"quote\": \"Clients and customers are also sources of cybersecurity risk to the Firm and its information assets, particularly when their activities and systems are beyond the Firm\u2019s own security and control systems.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-341\", \"quote\": \"The governance structure for the Global Cybersecurity and Technology Controls organization is designed to appropriately identify, escalate and mitigate cybersecurity risks.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-337\", \"quote\": \"The Global Chief Information Security Officer (\u201cCISO\u201d) reports to the Global Chief Information Officer, and is a member of key cybersecurity governance forums.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-336\", \"quote\": \"Risks from cybersecurity threats, including any previous cybersecurity events, have not materially affected the Firm or its business strategy, results of operations or financial condition.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-343\", \"quote\": \"As part of its oversight of management\u2019s implementation and maintenance of the Firm\u2019s risk management framework, the Firm\u2019s Board of Directors receives periodic updates from the CIO, the CISO and senior members of the CTOC concerning cybersecurity matters.\"},\n{\"chunk_id\": \"JPM-2026-02-13-mda-335\", \"quote\": \"Third parties with which the Firm does business, that facilitate the Firm\u2019s business activities (e.g., vendors, supply chain, exchanges, clearing houses, central depositories, and financial intermediaries) or that the Firm has acquired are also sources of cybersecurity risk to the Firm.\"}]",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "cybersecurity risk",
+       "ticker": "JPM"
+      },
+      "ok": true,
+      "seconds": 0.013,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 5758,
+    "completion_tokens": 1823,
+    "seconds": 285.48
+   }
+  },
+  {
+   "id": "f05",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 312.4,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 6657,
+   "completion_tokens": 1819,
+   "answer": {
+    "question": "How could climate change regulation affect Exxon Mobil's business, according to its 10-K?",
+    "answer": "{\"answer\": \"According to the 10-K filing, Exxon Mobil Corp (XOM) considers climate change policies and regulations as part of its Outlook, which reflects an environment with increasingly stringent climate policies. The Corporation has taken into account policies established to reduce energy-related greenhouse gas emissions in its long-term Outlook. ExxonMobil monitors updates to the Nationally Determined Contributions (NDCs) submitted by nations that are signatories to the Paris Agreement, as well as other policy developments in light of net-zero ambitions formulated by some nations. ExxonMobil also considers a range of scenarios, including remote scenarios, to help inform perspective of the future and enhance strategic thinking over time. ExxonMobil's Outlook includes internal estimates and projections based upon internal data and analyses as well as publicly available information from external sources including the International Energy Agency.\", \"citations\": [{\"chunk_id\": \"XOM-2026-02-18-mda-027\", \"quote\": \"International accords and underlying regional and national regulations covering greenhouse gas emissions continue to evolve with uncertain timing and outcome, making it difficult to predict their business impact. For many years, the Corporation has taken into account policies established to reduce energy-related greenhouse gas emissions in its long-term Outlook.\"}, {\"chunk_id\": \"XOM-2026-02-18-mda-028\", \"quote\": \"As people and nations look for ways to reduce risks of global climate change, they will continue to need practical solutions that do not jeopardize the affordability or reliability of the energy they need. The Corporation continues to monitor the updates to the Nationally Determined Contributions (NDCs) that are submitted by nations that are signatories to the Paris Agreement, as well as other policy developments in light of net-zero ambitions formulated by some nations.\"}, {\"chunk_id\": \"XOM-2026-02-18-mda-012\", \"quote\": \"In addition, ExxonMobil considers a range of scenarios, including remote scenarios, to help inform perspective of the future and enhance strategic thinking over time. Included in the range of these scenarios are the Intergovernmental Panel on Climate Change (IPCC) Likely Below 2\u00b0C scenarios and three scenarios from the International Energy Agency (IEA): IEA Stated Policies Scenario (STEPS; 2025 World Energy Outlook (WEO)), which reflects a sector-by-sector assessment of current policy in place and those announced by governments; IEA Announced Pledges Scenario (APS; 2024 WEO), which reflects aspirational government targets met on time and in full; and IEA Net Zero Emissions by 2050 Scenario (NZE; 2025 WEO), which the IEA describes as highly ambitious and challenging, acknowledging that society is not currently on the IEA NZE pathway.\"}, {\"chunk_id\": \"XOM-2026-02-18-mda-016\", \"quote\": \"Under our Outlook, global electricity demand is expected to increase more than 70 percent from 2024 to 2050, with developing countries likely to account for approximately 80 percent of the increase. Consistent with this projection, power generation is expected to remain the largest and fastest growing major segment of global primary energy demand, supported by a wide variety of energy sources. The share of coal-fired generation is expected to decline substantially to approximately 15 percent of the world\u2019s electricity in 2050, versus approximately 35 percent in 2024, in part due to policies to improve air quality as well as reduce greenhouse gas emissions to address risks related",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "climate change regulation",
+       "section": "mda",
+       "ticker": "XOM"
+      },
+      "ok": true,
+      "seconds": 0.015,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 6657,
+    "completion_tokens": 1819,
+    "seconds": 312.35
+   }
+  },
+  {
+   "id": "f06",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 190.0,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 4,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 4438,
+   "completion_tokens": 754,
+   "answer": {
+    "question": "What does Pfizer say about patent expirations and loss of exclusivity?",
+    "answer": "Pfizer Inc. says that the loss, expiration or invalidation of intellectual property rights, patent litigation settlements and judgments, and the expiration of co-promotion and licensing rights can have a material adverse effect on their revenues. They also mention that certain of their products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and they expect certain products to face new or increased generic competition over the next few years. They anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of their in-line products experience these expirations. Pfizer Inc. also notes that they expect the rate of the reduction of revenues from patent-based or regulatory exclusivity expiries to significantly accelerate over the next few years. They anticipate that revenues from patent-based or regulatory exclusivity expiries will be $1.5 billion in 2026.",
+    "citations": [
+     {
+      "chunk_id": "PFE-2026-02-26-mda-016",
+      "ticker": "PFE",
+      "company": "Pfizer Inc",
+      "filing_date": "2026-02-26",
+      "section": "mda",
+      "quote": "We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations, with the rate of the reduction of revenues from patent-based or regulatory exclusivity expiries expected to significantly accelerate over the next few years.",
+      "quote_source": "selected"
+     },
+     {
+      "chunk_id": "PFE-2026-02-26-business-037",
+      "ticker": "PFE",
+      "company": "Pfizer Inc",
+      "filing_date": "2026-02-26",
+      "section": "business",
+      "quote": "Loss of Intellectual Property Rights. The loss, expiration or invalidation of intellectual property rights, patent litigation settlements and judgments and the expiration of co-promotion and licensing rights can have a material adverse effect on our revenues.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "PFE-2026-02-26-risk_factors-007",
+      "ticker": "PFE",
+      "company": "Pfizer Inc",
+      "filing_date": "2026-02-26",
+      "section": "risk_factors",
+      "quote": "In addition, competition from manufacturers of generic drugs, including from generic versions of competitors\u2019 branded products that lose their market exclusivity, is a major challenge for our branded products. Certain of our products have experienced significant generic competition over the last few years.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "PFE-2026-02-26-risk_factors-011",
+      "ticker": "PFE",
+      "company": "Pfizer Inc",
+      "filing_date": "2026-02-26",
+      "section": "risk_factors",
+      "quote": "We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations. In addition, patents covering a number of our best-selling products are, or have been, the subject of pending legal challenges.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Pfizer patent expirations loss of exclusivity",
+       "ticker": "PFE"
+      },
+      "ok": true,
+      "seconds": 0.015,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 4438,
+    "completion_tokens": 754,
+    "seconds": 190.01
+   }
+  },
+  {
+   "id": "f07",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 186.2,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 4,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 3896,
+   "completion_tokens": 922,
+   "answer": {
+    "question": "How does Coca-Cola describe its operating segments?",
+    "answer": "Coca-Cola Co (KO) describes its operating segments based on geographic responsibility, which is consistent with the way management runs the business. The company's geographic operating segments are generally subdivided into smaller geographic regions, which are reporting units. The operating segments include North America, EMEA (Eurasia and Middle East), Latin America, Asia Pacific, and Bottling Investments. Each consolidated bottling operation within the Bottling Investments operating segment is its own reporting unit.",
+    "citations": [
+     {
+      "chunk_id": "KO-2026-02-20-mda-053",
+      "ticker": "KO",
+      "company": "Coca Cola Co",
+      "filing_date": "2026-02-20",
+      "section": "mda",
+      "quote": "The operating segment reported growth in unit case volume of 7% in the Eurasia and Middle East operating unit, growth of 3% in the Africa operating unit and growth in energy drinks, partially offset by a decline of 1% in the Europe operating unit.",
+      "quote_source": "selected"
+     },
+     {
+      "chunk_id": "KO-2026-02-20-mda-052",
+      "ticker": "KO",
+      "company": "Coca Cola Co",
+      "filing_date": "2026-02-20",
+      "section": "mda",
+      "quote": "Geographic operating segment data reflects unit case volume growth for all bottlers, both consolidated and unconsolidated, and distributors in the applicable geographic areas.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "KO-2026-02-20-mda-054",
+      "ticker": "KO",
+      "company": "Coca Cola Co",
+      "filing_date": "2026-02-20",
+      "section": "mda",
+      "quote": "Unit case volume in North America decreased 1%, which included a 1% decline in Trademark Coca-Cola, a 2% decline in juice, value-added dairy and plant-based beverages and a 1% decline in sparkling flavors, partially offset by growth in energy drinks.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "KO-2026-02-20-mda-024",
+      "ticker": "KO",
+      "company": "Coca Cola Co",
+      "filing_date": "2026-02-20",
+      "section": "mda",
+      "quote": "Our geographic operating segments are generally subdivided into smaller geographic regions, which are reporting units.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Coca-Cola operating segments",
+       "section": "mda",
+       "ticker": "KO"
+      },
+      "ok": true,
+      "seconds": 0.016,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 3896,
+    "completion_tokens": 922,
+    "seconds": 186.23
+   }
+  },
+  {
+   "id": "f08",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 74.3,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 3372,
+   "completion_tokens": 73,
+   "answer": {
+    "question": "How many associates does Walmart employ?",
+    "answer": "{}",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Walmart associates"
+      },
+      "ok": true,
+      "seconds": 0.012,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 3372,
+    "completion_tokens": 73,
+    "seconds": 74.27
+   }
+  },
+  {
+   "id": "f09",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 105.7,
+   "tools": "search_filings! search_filings",
+   "tool_calls": 2,
+   "citations": 1,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 4359,
+   "completion_tokens": 296,
+   "answer": {
+    "question": "Who does Netflix say it competes with for members' entertainment time?",
+    "answer": "Netflix, Inc. says it competes with other entertainment services that offer TV series, films, games, and live programming across a wide variety of genres and languages. The company aims to continuously improve its members' experience by offering compelling content that delights them and attracts new members.",
+    "citations": [
+     {
+      "chunk_id": "NFLX-2026-01-23-business-000",
+      "ticker": "NFLX",
+      "company": "Netflix Inc",
+      "filing_date": "2026-01-23",
+      "section": "business",
+      "quote": "(\u201cNetflix\u201d, the \u201cCompany\u201d, \u201cregistrant\u201d, \u201cwe\u201d, or \u201cus\u201d) is one of the world\u2019s leading entertainment services offering TV series, films, games and live programming across a wide variety of genres and languages.",
+      "quote_source": "selected"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Netflix competitors",
+       "ticker": "NFLX",
+       "section": "competition"
+      },
+      "ok": false,
+      "seconds": 0.002,
+      "error": "Error executing tool search_filings: Unknown section 'competition'. Use one of: business, risk_factors, mda, or omit it."
+     },
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Netflix competitors",
+       "section": "business",
+       "ticker": "NFLX"
+      },
+      "ok": true,
+      "seconds": 0.012,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 4359,
+    "completion_tokens": 296,
+    "seconds": 105.75
+   }
+  },
+  {
+   "id": "f10",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 309.1,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 6405,
+   "completion_tokens": 1855,
+   "answer": {
+    "question": "What does Boeing say about 737 production and quality?",
+    "answer": "{\"answer\": \"Boeing Co (BA) says in their 10-K filings that their commercial aircraft products are required to comply with FAA regulations governing production and quality systems, airworthiness and installation approvals, repair procedures and continuing operational safety. The 737 program may only increase production rates and/or implement new production lines with the concurrence of the FAA. Boeing also mentions that the 737-9 door plug accident in January 2024 significantly impacted their financial position, results of operations and cash flows during 2024 and 2025. They have slowed production rates and delayed planned production rate increases to reduce traveled work in their factory and at their suppliers. Boeing has also taken additional actions to improve safety and quality, including investing in workforce training, simplifying plans and processes, eliminating defects, and enhancing their safety and quality culture. The 737-9 door plug accident and their resulting actions, including slowing production, significantly impacted their financial position, results of operations and cash flows during 2024 and 2025.\", \"citations\": [{\"chunk_id\": \"BA-2026-01-30-business-011\", \"quote\": \"Boeing Co (BA) (BA), 10-K filed 2026-01-30, section business\\nCommercial Aircraft. In the U.S., our commercial aircraft products are required to comply with FAA regulations governing production and quality systems, airworthiness and installation approvals, repair procedures and continuing operational safety. For example, as a result of the 737-9 door plug accident in January 2024, the FAA investigated the 737 quality control system, including Spirit AeroSystems Holdings, Inc. (Spirit), and increased its oversight of our production and quality and safety management systems. The 737 program may only increase production rates and/or implement new production lines with the concurrence of the FAA. New aircraft models and new derivative aircraft are required to obtain FAA certification prior to entry into service. Outside the U.S., similar requirements exist for airworthiness, installation and operational approvals. These requirements are generally administered by the national aviation authorities of each country and, in the case of Europe, coordinated by the European Union Aviation Safety Agency.\"}, {\"chunk_id\": \"BA-2026-01-30-mda-002\", \"quote\": \"On January 5, 2024, a 737-9 flight made an emergency landing after a mid-exit door plug detached in flight. As a result of the accident, the Federal Aviation Administration (FAA) performed an investigation into the 737 quality control system and imposed certain additional requirements and restrictions. As part of our plan to improve quality and safety and to address the issues identified, we slowed production rates and delayed planned production rate increases to reduce traveled work in our factory, as well as at our suppliers. We have also taken additional actions to improve safety and quality, including investing in workforce training, simplifying plans and processes, eliminating defects, and enhancing our safety and quality culture. The 737-9 door plug accident and our resulting actions, including slowing production, significantly impacted our financial position, results of operations and cash flows during 2024 and 2025.\"}, {\"chunk_id\": \"BA-2026-01-30-mda-087\", \"quote\": \"Factors that influence these estimates include the timing of production rate increases, internal and supplier performance trends, production quality, labor instability, supply chain delays and quality issues, learning curve, change incorporation, rework or safety enhancements,",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "ticker": "BA",
+       "query": "737 production quality"
+      },
+      "ok": true,
+      "seconds": 0.014,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 6405,
+    "completion_tokens": 1855,
+    "seconds": 309.15
+   }
+  },
+  {
+   "id": "f11",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 287.4,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 5117,
+   "completion_tokens": 1821,
+   "answer": {
+    "question": "What risks does Microsoft describe related to artificial intelligence?",
+    "answer": "{\"answer\": \"Microsoft Corp describes risks related to artificial intelligence in their filings. These risks include the potential for competitors to succeed with a vertically-integrated model, which could lead to increased costs and operational risks. Additionally, Microsoft acknowledges that adversaries may use vulnerabilities to install malware, and that attackers could exploit AI-generated code for malicious purposes. Furthermore, the company notes that cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to their reputation or competitive position. Finally, Microsoft highlights the risk of defects in design, manufacture, or associated software in their datacenters and hardware products, which could adversely affect their business and results of operations.\",\"citations\": [{\"chunk_id\": \"MSFT-2026-07-29-risk_factors-003\", \"quote\": \"A competing vertically-integrated model, in which a single firm controls the hardware and software elements of a product and related services, has succeeded with some consumer products such as PCs, tablets, smartphones, gaming consoles, wearables, and other endpoint devices. Competitors pursuing this model also earn revenue from services integrated with the hardware and software platform, including applications and content sold through their integrated marketplaces. They may also be able to claim security and performance benefits from their vertically-integrated offer. We also offer some vertically-integrated hardware and software products and services. Expansion of our vertically-integrated capabilities, including developing proprietary hardware, infrastructure, and artificial intelligence (\u201cAI\u201d) models, could increase our cost structure, reduce margins, and expose us to operational risks.\"}, {\"chunk_id\": \"MSFT-2026-07-29-risk_factors-020\", \"quote\": \"CYBERSECURITY, DATA PRIVACY, AND PLATFORM ABUSE RISKS These events could adversely affect our business, operations, financial condition, and results of operations.\"}, {\"chunk_id\": \"MSFT-2026-07-29-risk_factors-023\", \"quote\": \"Challenges or failures to update or apply security patches to all hardware and devices connected to our systems, including end-of-life and end-of-support equipment, have and may continue to result in unauthorized access to our systems and data in the future. Cyber incidents and attacks, individually or in the aggregate, could adversely affect our financial condition, results of operations, competitive position, and reputation, or expose us to legal or regulatory risk.\"}, {\"chunk_id\": \"MSFT-2026-07-29-risk_factors-058\", \"quote\": \"Although our license agreements typically contain provisions that eliminate or limit our exposure to liability, these provisions may not withstand legal challenge.\"}, {\"chunk_id\": \"MSFT-2026-07-29-risk_factors-020\", \"quote\": \"CYBERSECURITY, DATA PRIVACY, AND PLATFORM ABUSE RISKS Security of our information technology Challenges or failures to update or apply security patches to all hardware and devices connected to our systems, including end-of-life and end-of-support equipment, have and may continue to result in unauthorized access to our systems and data in the future. Cyber incidents and attacks, individually or in the aggregate, could adversely affect our financial condition, results of operations, competitive position, and reputation, or expose us to legal or regulatory risk.\"}, {\"chunk_id\": \"MSFT-2026-07-29-risk_factors-020\", \"quote\": \"CYBERSECURITY, DATA PRIVACY, AND PLATFORM ABUSE RISKS Our datacenters and our hardware products such as XBOX consoles, Surface devices, and other devices we design and market are highly complex. Failure to prevent, detect, or address defects in",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "Microsoft artificial intelligence risk",
+       "section": "risk_factors",
+       "ticker": "MSFT"
+      },
+      "ok": true,
+      "seconds": 0.013,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 5117,
+    "completion_tokens": 1821,
+    "seconds": 287.37
+   }
+  },
+  {
+   "id": "f12",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 288.7,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 5968,
+   "completion_tokens": 1794,
+   "answer": {
+    "question": "What does Meta say about privacy and data protection regulation?",
+    "answer": "{\"answer\": \"Meta Platforms, Inc. (META) mentions in their 10-K filings that they are subject to complex and evolving U.S. and foreign laws and regulations regarding privacy, data use, data combination, data protection, content, AI, competition, youth, safety, consumer protection, advertising, e-commerce, and other matters. These laws and regulations could result in claims, changes to their products and business practices, monetary penalties, increased cost of operations, or declines in user growth or engagement, or otherwise harm their business. Meta also highlights the General Data Protection Regulation (GDPR), Digital Markets Act (DMA), Digital Services Act (DSA), UK Online Safety Act (OSA), Artificial Intelligence Act (EU AI Act), and the UK Digital Markets, Competition and Consumer Act (DMCC) as examples of evolving laws and regulations that could impact their business.\", \"citations\": [{\"chunk_id\": \"META-2026-01-29-risk_factors-141\", \"quote\": \"Our business is subject to complex and evolving U.S. and foreign laws and regulations regarding privacy, data use, data combination, data protection, content, AI, competition, youth, safety, consumer protection, advertising, e-commerce, and other matters. Many of these laws and regulations are subject to change and uncertain interpretation, and could result in claims, changes to our products and business practices, monetary penalties, increased cost of operations, or declines in user growth or engagement, or otherwise harm our business.\"}, {\"chunk_id\": \"META-2026-01-29-risk_factors-002\", \"quote\": \"Risks Related to Government Regulation and Enforcement\\n\u2022our ability to build, maintain, and scale our technical infrastructure, and risks associated with disruptions in our service, catastrophic events, and crises;\\n\u2022operating our business in multiple countries around the world;\\n\u2022litigation, including class action lawsuits;\\n\u2022acquisitions and our ability to successfully integrate our acquisitions;\\nRisks Related to Government Regulation and Enforcement\\n\u2022government restrictions on access to Facebook or our other products, or other actions that impair our ability to sell or deliver advertising, in their countries;\\n\u2022complex and evolving U.S. and foreign privacy, data use, data combination, data protection, content and content moderation, competition, youth, safety, consumer protection, advertising, and other laws and regulations, including the General Data Protection Regulation (GDPR), Digital Markets Act (DMA), Digital Services Act (DSA), UK Online Safety Act (OSA), Artificial Intelligence Act (EU AI Act), and the UK Digital Markets, Competition and Consumer Act (DMCC);\"}, {\"chunk_id\": \"META-2026-01-29-risk_factors-142\", \"quote\": \"We are subject to a variety of laws and regulations in the United States and abroad that involve matters central to our business, including privacy, data use, data combination, data protection and personal information, the provision of our services to younger users, biometrics, encryption, rights of publicity, content, integrity, intellectual property, advertising, marketing, distribution, data security, data retention and deletion, data localization and storage, data disclosure, AI and machine learning, electronic contracts and other communications, competition, protection of minors, consumer protection, civil rights, accessibility, telecommunications, product liability, medical devices, e-commerce, taxation, economic or other trade controls including sanctions, export controls, anti-corruption and political law compliance, securities law compliance, and online payment services. The introduction of new products, expansion of our activities in certain jurisdictions, or other actions that we may take may subject us to additional laws, regulations, or other government scrutiny. In addition, these U.S.\"",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "privacy data protection regulation",
+       "ticker": "META"
+      },
+      "ok": true,
+      "seconds": 0.014,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 5968,
+    "completion_tokens": 1794,
+    "seconds": 288.66
+   }
+  },
+  {
+   "id": "f13",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 185.2,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 5,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 3658,
+   "completion_tokens": 988,
+   "answer": {
+    "question": "What does UnitedHealth Group say about medical cost trends?",
+    "answer": "UnitedHealth Group Inc. (UNH) discusses medical cost trends in their 10-K filings. The company notes that medical cost trend factors are significant in developing their medical costs payable estimates for the most recent two months. These factors include claims incurred in prior months, provider contracting, expected unit costs, benefit design, and a review of health care utilization indicators. The company also mentions that medical cost trends primarily relate to changes in unit costs, care activity, and prescription drug costs. Additionally, the company highlights that the Inflation Reduction Act (IRA) has altered the Medicare Part D model and benefits, shifting more risk to plans, which results in both increased premiums and medical costs. The company also notes that the member profile of newly added patients under value-based care arrangements, additional people served by their Medicare Advantage plans in markets where other plans exited, and people served within their individual exchange business have contributed to increased medical costs. These trends may continue in future periods.",
+    "citations": [
+     {
+      "chunk_id": "UNH-2026-03-02-mda-044",
+      "ticker": "UNH",
+      "company": "Unitedhealth Group Inc",
+      "filing_date": "2026-03-02",
+      "section": "mda",
+      "quote": "Medical cost PMPM trend factors are significant factors we use in developing our medical costs payable estimates for the most recent two months. Medical cost trend factors are developed through a comprehensive analysis of claims incurred in prior months, provider contracting and expected unit costs, benefit design and a review of a broad set of health care utilization indicators.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "UNH-2026-03-02-mda-041",
+      "ticker": "UNH",
+      "company": "Unitedhealth Group Inc",
+      "filing_date": "2026-03-02",
+      "section": "mda",
+      "quote": "In developing our medical costs payable estimates, we apply different estimation methods depending on the month for which incurred claims are being estimated. For example, for the most recent two months, we estimate claim costs incurred by applying observed medical cost trend factors to the average per member per month (PMPM) medical costs incurred in prior months for which more complete claim data is available, supplemented by a review of near-term completion factors.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "UNH-2026-03-02-mda-011",
+      "ticker": "UNH",
+      "company": "Unitedhealth Group Inc",
+      "filing_date": "2026-03-02",
+      "section": "mda",
+      "quote": "Medical Cost Trends. Our medical cost trends primarily relate to changes in unit costs, care activity and prescription drug costs. We have observed increased care patterns that are above what we expected and contemplated in our pricing and benefits design.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "UNH-2026-03-02-mda-007",
+      "ticker": "UNH",
+      "company": "Unitedhealth Group Inc",
+      "filing_date": "2026-03-02",
+      "section": "mda",
+      "quote": "Pricing Trends. To price our health care benefits, products and services, we start with our view of expected future costs, including medical care patterns, the mix and health status of people served, inflation and labor market dynamics.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "UNH-2026-03-02-mda-020",
+      "ticker": "UNH",
+      "company": "Unitedhealth Group Inc",
+      "filing_date": "2026-03-02",
+      "section": "mda",
+      "quote": "Medical costs increased primarily due to the IRA-driven impacts on Medicare Part D plans, elevated medical cost trend and growth in people served through Medicare Advantage and those with higher acuity needs. The MCR increased as a result of the revenue effects of the Medicare funding reductions, elevated medical cost trend, the member profile of newly added patients under value-based care arrangements, the acceleration of anticipated future losses in 2026 related to certain Optum Health value-based care contracts, decreased favorable development, the impacts of the IRA on Medicare Part D and the impacts of market morbidity changes on our individual exchange offerings, partially offset by the incremental medical costs for accommodations made to care providers in 2024 as a result of the Change Healthcare cyberattack.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "ticker": "UNH",
+       "query": "UnitedHealth Group medical cost trends",
+       "section": "mda"
+      },
+      "ok": true,
+      "seconds": 0.017,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 3658,
+    "completion_tokens": 988,
+    "seconds": 185.24
+   }
+  },
+  {
+   "id": "f14",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": false,
+    "cited": false,
+    "citations_on_target": null,
+    "evidence_found": false,
+    "passed": false
+   },
+   "seconds": 240.9,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 6193,
+   "completion_tokens": 1317,
+   "answer": {
+    "question": "What does Visa say about interchange fee regulation or litigation?",
+    "answer": "[\"V-2026-11-05-risk_factors-006\", \"V-2026-11-05-risk_factors-005\", \"V-2026-11-05-mda-005\", \"V-2026-11-05-business-077\"]",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "interchange fee regulation litigation",
+       "ticker": "V"
+      },
+      "ok": true,
+      "seconds": 0.017,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 6193,
+    "completion_tokens": 1317,
+    "seconds": 240.91
+   }
+  },
+  {
+   "id": "f15",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 126.6,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 1,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 4052,
+   "completion_tokens": 323,
+   "answer": {
+    "question": "What does Amazon's MD&A say about AWS sales?",
+    "answer": "The increase in AWS operating income in 2025, compared to the prior year, is primarily due to increased sales, partially offset by spending on technology infrastructure that was primarily driven by additional investments to support AWS business growth. Changes in foreign exchange rates negatively impacted operating income by $341 million in 2025.",
+    "citations": [
+     {
+      "chunk_id": "AMZN-2026-02-06-mda-031",
+      "ticker": "AMZN",
+      "company": "Amazon Com Inc",
+      "filing_date": "2026-02-06",
+      "section": "mda",
+      "quote": "Costs to operate our AWS segment are primarily classified as \u201cTechnology and infrastructure\u201d as we leverage a shared infrastructure that supports both our internal technology requirements and external sales to AWS customers.",
+      "quote_source": "selected"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "section": "mda",
+       "query": "AWS sales",
+       "ticker": "AMZN"
+      },
+      "ok": true,
+      "seconds": 0.013,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 4052,
+    "completion_tokens": 323,
+    "seconds": 126.59
+   }
+  },
+  {
+   "id": "f16",
+   "type": "filings",
+   "score": {
+    "searched_company": true,
+    "grounded": true,
+    "cited": true,
+    "citations_on_target": 1.0,
+    "evidence_found": true,
+    "passed": true
+   },
+   "seconds": 151.9,
+   "tools": "search_filings",
+   "tool_calls": 1,
+   "citations": 3,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 3,
+   "prompt_tokens": 3549,
+   "completion_tokens": 711,
+   "answer": {
+    "question": "What does Chevron say about the volatility of crude oil prices?",
+    "answer": "Chevron Corp (CVX) states in its 10-K filing that it is primarily in a commodities business that has a history of price volatility. The most significant factor affecting the company\u2019s results of operations is the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by various factors including general economic conditions, industry production and inventory levels, technology advancements, geopolitical risks, and governmental regulations. The company evaluates the risk of changing commodity prices as a core part of its business planning process. An investment in the company carries significant exposure to fluctuations in global prices of crude oil, natural gas, and natural gas liquids.",
+    "citations": [
+     {
+      "chunk_id": "CVX-2026-02-24-risk_factors-001",
+      "ticker": "CVX",
+      "company": "Chevron Corp",
+      "filing_date": "2026-02-24",
+      "section": "risk_factors",
+      "quote": "The most significant factor that affects the company\u2019s results of operations are the prices of crude oil, natural gas, and natural gas liquids, which can be influenced by general economic conditions and level of economic growth, including low or negative growth; industry production and inventory levels; technology advancements, including those in pursuit of a lower carbon economy; production quotas or other actions that might be imposed by the Organization of Petroleum Exporting Countries or other producers; weather-related damage and disruptions due to other natural or human causes beyond our control; competing fuel prices; geopolitical risks; the pace of energy transition; customer and",
+      "quote_source": "selected"
+     },
+     {
+      "chunk_id": "CVX-2026-02-24-risk_factors-002",
+      "ticker": "CVX",
+      "company": "Chevron Corp",
+      "filing_date": "2026-02-24",
+      "section": "risk_factors",
+      "quote": "Chevron evaluates the risk of changing commodity prices as a core part of its business planning process. An investment in the company carries significant exposure to fluctuations in global prices of crude oil, natural gas, and natural gas liquids.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "CVX-2026-02-24-risk_factors-005",
+      "ticker": "CVX",
+      "company": "Chevron Corp",
+      "filing_date": "2026-02-24",
+      "section": "risk_factors",
+      "quote": "Creating and maintaining an inventory of economic projects depends on many factors, including obtaining and renewing rights to explore, develop and produce hydrocarbons; drilling success; reservoir optimization; technology advancements; ability to bring long-lead-time, capital-intensive projects to completion on budget and on schedule; partner alignment, including strategic support; and efficient and profitable operation of mature properties.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "ticker": "CVX",
+       "section": "risk_factors",
+       "query": "volatility crude oil"
+      },
+      "ok": true,
+      "seconds": 0.014,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 3,
+    "prompt_tokens": 3549,
+    "completion_tokens": 711,
+    "seconds": 151.91
+   }
+  },
+  {
+   "id": "o01",
+   "type": "out_of_scope",
+   "score": {
+    "cited": true,
+    "passed": false
+   },
+   "seconds": 250.6,
+   "tools": "search_filings! search_filings",
+   "tool_calls": 2,
+   "citations": 5,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 5553,
+   "completion_tokens": 1144,
+   "answer": {
+    "question": "What does Toyota list as the main risk factors in its latest 10-K?",
+    "answer": "The main risk factors listed by Apple Inc. in their latest 10-K filing include Macroeconomic and Industry Risks, Financial Risks, Credit Risk, and Financial Performance Risks. Specifically, the document mentions that the Company's investments can be negatively affected by changes in liquidity, credit deterioration, financial results, market and economic conditions, political risk, sovereign risk, interest rate fluctuations or other factors. The value and liquidity of the Company's cash, cash equivalents, and marketable securities may fluctuate substantially. The Company's gross margins vary significantly across its products, services, geographic segments and distribution channels and can change over time. The Company's financial performance is subject to risks associated with changes in the value of the U.S. dollar relative to local currencies. Further, the Company generates a significant portion of its net sales from a single product category and certain of the Company's services, including third-party licensing arrangements, contribute significantly to the Company's results of operations. A decline in demand for that product and those services, or an unfavorable change in the Company's services offerings, including its third-party licensing arrangements, could significantly impact the Company's net sales, gross margins and results of operations.",
+    "citations": [
+     {
+      "chunk_id": "AAPL-2026-11-03-risk_factors-000",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "risk_factors",
+      "quote": "Item 1A. Risk Factors The following summarizes factors that could have a material adverse effect on the Company\u2019s business, reputation, results of operations, financial condition and stock price.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "AAPL-2026-11-03-risk_factors-087",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "risk_factors",
+      "quote": "The Company\u2019s investments can be negatively affected by changes in liquidity, credit deterioration, financial results, market and economic conditions, political risk, sovereign risk, interest rate fluctuations or other factors.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "AAPL-2026-11-03-risk_factors-082",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "risk_factors",
+      "quote": "The Company is also subject to new and changing laws, regulations and other legal obligations regarding online safety, including enhanced protections for minors, and mandatory age verification requirements.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "AAPL-2026-11-03-risk_factors-084",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "risk_factors",
+      "quote": "These and other factors could have a material adverse effect on the Company\u2019s business, results of operations, financial condition and stock price.",
+      "quote_source": "model"
+     },
+     {
+      "chunk_id": "AAPL-2026-11-03-mda-007",
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "filing_date": "2026-11-03",
+      "section": "mda",
+      "quote": "The Company\u2019s future gross margins can be impacted by a variety of factors, as discussed in Part I, Item 1A of this Form 10-K under the heading \u201cRisk Factors.\u201d As a result, the Company believes, in general, gross margins will be subject to volatility and downward pressure.",
+      "quote_source": "model"
+     }
+    ],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": true,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "risk_factors",
+       "ticker": "TM"
+      },
+      "ok": false,
+      "seconds": 0.003,
+      "error": "Error executing tool search_filings: 'TM' is not in the index. Companies: AAPL (Apple Inc.), AMZN (Amazon Com Inc), BA (Boeing Co), BAC (Bank Of America Corp /De/), CVX (Chevron Corp), GOOGL (Alphabet Inc.), GS (Goldman Sachs Group Inc), JNJ (Johnson & Johnson), JPM (Jpmorgan Chase & Co), KO (Coca Cola Co), META (Meta Platforms, Inc.), MSFT (Microsoft Corp), NFLX (Netflix Inc), NVDA (Nvidia Corp), PFE (Pfizer Inc), TSLA (Tesla, Inc.), UNH (Unitedhealth Group Inc), V (Visa Inc.), WMT (Walmart Inc"
+     },
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "risk_factors",
+       "ticker": "AAPL"
+      },
+      "ok": true,
+      "seconds": 0.013,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 5553,
+    "completion_tokens": 1144,
+    "seconds": 250.6
+   }
+  },
+  {
+   "id": "o02",
+   "type": "out_of_scope",
+   "score": {
+    "cited": false,
+    "passed": true
+   },
+   "seconds": 62.2,
+   "tools": "search_filings! search_filings!",
+   "tool_calls": 2,
+   "citations": 0,
+   "rejected_citations": 0,
+   "repaired": false,
+   "llm_calls": 4,
+   "prompt_tokens": 3196,
+   "completion_tokens": 152,
+   "answer": {
+    "question": "What does Starbucks say about coffee bean prices in its 10-K?",
+    "answer": "It seems that the ticker 'SBUX' for Starbucks is not in our index. Let's try searching with the company name instead.",
+    "citations": [],
+    "rejected_citations": [],
+    "fraud_scores": [],
+    "grounded": false,
+    "repaired": false,
+    "tool_calls": [
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "query": "coffee bean prices",
+       "ticker": "SBUX"
+      },
+      "ok": false,
+      "seconds": 0.003,
+      "error": "Error executing tool search_filings: 'SBUX' is not in the index. Companies: AAPL (Apple Inc.), AMZN (Amazon Com Inc), BA (Boeing Co), BAC (Bank Of America Corp /De/), CVX (Chevron Corp), GOOGL (Alphabet Inc.), GS (Goldman Sachs Group Inc), JNJ (Johnson & Johnson), JPM (Jpmorgan Chase & Co), KO (Coca Cola Co), META (Meta Platforms, Inc.), MSFT (Microsoft Corp), NFLX (Netflix Inc), NVDA (Nvidia Corp), PFE (Pfizer Inc), TSLA (Tesla, Inc.), UNH (Unitedhealth Group Inc), V (Visa Inc.), WMT (Walmart I"
+     },
+     {
+      "server": "sec-filings",
+      "tool": "search_filings",
+      "arguments": {
+       "ticker": "SBUX",
+       "query": "coffee bean prices"
+      },
+      "ok": false,
+      "seconds": 0.004,
+      "error": "Error executing tool search_filings: 'SBUX' is not in the index. Companies: AAPL (Apple Inc.), AMZN (Amazon Com Inc), BA (Boeing Co), BAC (Bank Of America Corp /De/), CVX (Chevron Corp), GOOGL (Alphabet Inc.), GS (Goldman Sachs Group Inc), JNJ (Johnson & Johnson), JPM (Jpmorgan Chase & Co), KO (Coca Cola Co), META (Meta Platforms, Inc.), MSFT (Microsoft Corp), NFLX (Netflix Inc), NVDA (Nvidia Corp), PFE (Pfizer Inc), TSLA (Tesla, Inc.), UNH (Unitedhealth Group Inc), V (Visa Inc.), WMT (Walmart I"
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 3196,
+    "completion_tokens": 152,
+    "seconds": 62.2
+   }
+  },
+  {
+   "id": "t01",
+   "type": "fraud",
+   "score": {
+    "called_tool": true,
+    "exact_arguments": true,
+    "model_flagged": false,
+    "model_probability": 0.039804,
+    "passed": true
+   },
+   "seconds": 83.1,
+   "tools": "score_transaction",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 3,
+   "repaired": true,
+   "llm_calls": 4,
+   "prompt_tokens": 3314,
+   "completion_tokens": 426,
+   "answer": {
+    "question": "Card card_0001 just spent R$ 4,850.00 on electronics in Manaus at 2026-03-01T03:12:00. Score it with the fraud model: is it likely fraud, and why?",
+    "answer": "is likely not fraud",
+    "citations": [],
+    "rejected_citations": [
+     {
+      "chunk_id": "time_since_last_tx",
+      "quote": "The time since the last transaction is 99999.0.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "category_entertainment",
+      "quote": "The category of the transaction is electronics (0.0).",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "tx_count_last_5min",
+      "quote": "The transaction count in the last 5 minutes is 0.0.",
+      "reason": "chunk_id was not returned by any tool"
+     }
+    ],
+    "fraud_scores": [
+     {
+      "probability": 0.039804,
+      "flagged": false,
+      "threshold": 0.562504,
+      "home_city": "Sao Paulo",
+      "features": {
+       "amount": 4850.0,
+       "distance_km_from_home": 2689.4650108375786,
+       "tx_count_last_5min": 0.0,
+       "time_since_last_tx": 99999.0,
+       "hour_of_day": 3.0,
+       "category_electronics": 1.0,
+       "category_entertainment": 0.0,
+       "category_fashion": 0.0,
+       "category_fuel": 0.0,
+       "category_groceries": 0.0,
+       "category_pharmacy": 0.0,
+       "category_restaurant": 0.0,
+       "category_travel": 0.0
+      },
+      "top_reasons": [
+       {
+        "feature": "time_since_last_tx",
+        "value": 99999.0,
+        "log_odds": -2.0779
+       },
+       {
+        "feature": "category_entertainment",
+        "value": 0.0,
+        "log_odds": -1.7681
+       },
+       {
+        "feature": "tx_count_last_5min",
+        "value": 0.0,
+        "log_odds": 1.1436
+       }
+      ]
+     }
+    ],
+    "grounded": false,
+    "repaired": true,
+    "tool_calls": [
+     {
+      "server": "fraud-scoring",
+      "tool": "score_transaction",
+      "arguments": {
+       "card_id": "card_0001",
+       "timestamp": "2026-03-01T03:12:00",
+       "amount": 4850,
+       "category": "electronics",
+       "city": "Manaus"
+      },
+      "ok": true,
+      "seconds": 0.017,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 3314,
+    "completion_tokens": 426,
+    "seconds": 83.12
+   }
+  },
+  {
+   "id": "t02",
+   "type": "fraud",
+   "score": {
+    "called_tool": true,
+    "exact_arguments": true,
+    "model_flagged": false,
+    "model_probability": 3e-06,
+    "passed": true
+   },
+   "seconds": 89.2,
+   "tools": "score_transaction",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 5,
+   "repaired": true,
+   "llm_calls": 4,
+   "prompt_tokens": 3250,
+   "completion_tokens": 488,
+   "answer": {
+    "question": "Score this transaction: card card_0007 paid R$ 64.90 for groceries in Brasilia at 2026-03-01T12:30:00. Should it raise an alert?",
+    "answer": "Should not raise an alert",
+    "citations": [],
+    "rejected_citations": [
+     {
+      "chunk_id": "home_city",
+      "quote": "The transaction is in the home city of Brasilia.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "category",
+      "quote": "The transaction category is groceries, which is not flagged as suspicious.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "amount",
+      "quote": "The amount is R$ 64.90, which is not unusually high for groceries.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "distance_km_from_home",
+      "quote": "The distance from home is 0.0 km, which is not flagged as suspicious.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "top_reasons",
+      "quote": "The top reasons for not flagging the transaction are the amount and the category (groceries).",
+      "reason": "chunk_id was not returned by any tool"
+     }
+    ],
+    "fraud_scores": [
+     {
+      "probability": 3e-06,
+      "flagged": false,
+      "threshold": 0.562504,
+      "home_city": "Brasilia",
+      "features": {
+       "amount": 64.9,
+       "distance_km_from_home": 0.0,
+       "tx_count_last_5min": 0.0,
+       "time_since_last_tx": 99999.0,
+       "hour_of_day": 12.0,
+       "category_electronics": 0.0,
+       "category_entertainment": 0.0,
+       "category_fashion": 0.0,
+       "category_fuel": 0.0,
+       "category_groceries": 1.0,
+       "category_pharmacy": 0.0,
+       "category_restaurant": 0.0,
+       "category_travel": 0.0
+      },
+      "top_reasons": [
+       {
+        "feature": "amount",
+        "value": 64.9,
+        "log_odds": -8.453
+       },
+       {
+        "feature": "distance_km_from_home",
+        "value": 0.0,
+        "log_odds": -2.792
+       },
+       {
+        "feature": "category_entertainment",
+        "value": 0.0,
+        "log_odds": -1.6488
+       }
+      ]
+     }
+    ],
+    "grounded": false,
+    "repaired": true,
+    "tool_calls": [
+     {
+      "server": "fraud-scoring",
+      "tool": "score_transaction",
+      "arguments": {
+       "amount": 64.9,
+       "card_id": "card_0007",
+       "category": "groceries",
+       "city": "Brasilia",
+       "timestamp": "2026-03-01T12:30:00Z"
+      },
+      "ok": true,
+      "seconds": 0.014,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 3250,
+    "completion_tokens": 488,
+    "seconds": 89.2
+   }
+  },
+  {
+   "id": "t03",
+   "type": "fraud",
+   "score": {
+    "called_tool": true,
+    "exact_arguments": false,
+    "model_flagged": false,
+    "model_probability": 0.169204,
+    "passed": false
+   },
+   "seconds": 103.6,
+   "tools": "score_transaction",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 5,
+   "repaired": true,
+   "llm_calls": 4,
+   "prompt_tokens": 3682,
+   "completion_tokens": 556,
+   "answer": {
+    "question": "Card card_0003 made fuel purchases in Curitiba at 2026-03-01T10:00:00, 10:00:20, 10:00:41 and 10:01:02, and now another of R$ 3.50 at 2026-03-01T10:01:25. Score the latest one, using the earlier times as the card's history.",
+    "answer": "0.180166",
+    "citations": [],
+    "rejected_citations": [
+     {
+      "chunk_id": "home_city",
+      "quote": "The transaction was in the city of Curitiba.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "category_fuel",
+      "quote": "The category of the transaction was fuel.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "amount",
+      "quote": "The amount of the transaction was R$ 3.50.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "hour_of_day",
+      "quote": "The transaction occurred at 10:01:25, which is in the 10th hour of the day.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "tx_count_last_5min",
+      "quote": "There were 3 transactions in the last 5 minutes.",
+      "reason": "chunk_id was not returned by any tool"
+     }
+    ],
+    "fraud_scores": [
+     {
+      "probability": 0.180166,
+      "flagged": false,
+      "threshold": 0.562504,
+      "home_city": "Curitiba",
+      "features": {
+       "amount": 3.5,
+       "distance_km_from_home": 0.0,
+       "tx_count_last_5min": 3.0,
+       "time_since_last_tx": 23.0,
+       "hour_of_day": 10.0,
+       "category_electronics": 0.0,
+       "category_entertainment": 0.0,
+       "category_fashion": 0.0,
+       "category_fuel": 1.0,
+       "category_groceries": 0.0,
+       "category_pharmacy": 0.0,
+       "category_restaurant": 0.0,
+       "category_travel": 0.0
+      },
+      "top_reasons": [
+       {
+        "feature": "amount",
+        "value": 3.5,
+        "log_odds": 7.9317
+       },
+       {
+        "feature": "category_entertainment",
+        "value": 0.0,
+        "log_odds": -7.3465
+       },
+       {
+        "feature": "distance_km_from_home",
+        "value": 0.0,
+        "log_odds": -1.5024
+       }
+      ]
+     }
+    ],
+    "grounded": false,
+    "repaired": true,
+    "tool_calls": [
+     {
+      "server": "fraud-scoring",
+      "tool": "score_transaction",
+      "arguments": {
+       "previous_timestamps": [
+        "2026-03-01T10:00:20",
+        "2026-03-01T10:00:41",
+        "2026-03-01T10:01:02"
+       ],
+       "timestamp": "2026-03-01T10:01:25",
+       "amount": 3.5,
+       "card_id": "card_0003",
+       "category": "fuel",
+       "city": "Curitiba"
+      },
+      "ok": true,
+      "seconds": 0.013,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 3682,
+    "completion_tokens": 556,
+    "seconds": 103.62
+   }
+  },
+  {
+   "id": "t04",
+   "type": "fraud",
+   "score": {
+    "called_tool": true,
+    "exact_arguments": true,
+    "model_flagged": false,
+    "model_probability": 0.095215,
+    "passed": true
+   },
+   "seconds": 114.7,
+   "tools": "score_transaction",
+   "tool_calls": 1,
+   "citations": 0,
+   "rejected_citations": 4,
+   "repaired": true,
+   "llm_calls": 4,
+   "prompt_tokens": 3455,
+   "completion_tokens": 693,
+   "answer": {
+    "question": "Card card_0005 bought a R$ 1,200.00 travel ticket in Recife at 2026-03-02T15:00:00. What does the fraud model say?",
+    "answer": "The fraud model does not flag this transaction. The probability of it being fraudulent is 0.095215, which is below the threshold of 0.562504. The top reasons for not flagging this transaction are the distance from the home city (home_city) and the time since the last transaction (time_since_last_tx), which are both below the threshold. The category of the transaction (category_travel) is also a significant factor in not flagging this transaction.",
+    "citations": [],
+    "rejected_citations": [
+     {
+      "chunk_id": "home_city",
+      "quote": "The home city is Belo Horizonte.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "distance_km_from_home",
+      "quote": "The distance from the home city is 1640.970581005887.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "time_since_last_tx",
+      "quote": "The time since the last transaction is 99999.0.",
+      "reason": "chunk_id was not returned by any tool"
+     },
+     {
+      "chunk_id": "category_travel",
+      "quote": "The category of the transaction is travel.",
+      "reason": "chunk_id was not returned by any tool"
+     }
+    ],
+    "fraud_scores": [
+     {
+      "probability": 0.095215,
+      "flagged": false,
+      "threshold": 0.562504,
+      "home_city": "Belo Horizonte",
+      "features": {
+       "amount": 1200.0,
+       "distance_km_from_home": 1640.970581005887,
+       "tx_count_last_5min": 0.0,
+       "time_since_last_tx": 99999.0,
+       "hour_of_day": 15.0,
+       "category_electronics": 0.0,
+       "category_entertainment": 0.0,
+       "category_fashion": 0.0,
+       "category_fuel": 0.0,
+       "category_groceries": 0.0,
+       "category_pharmacy": 0.0,
+       "category_restaurant": 0.0,
+       "category_travel": 1.0
+      },
+      "top_reasons": [
+       {
+        "feature": "distance_km_from_home",
+        "value": 1640.970581005887,
+        "log_odds": 2.5016
+       },
+       {
+        "feature": "time_since_last_tx",
+        "value": 99999.0,
+        "log_odds": -1.8552
+       },
+       {
+        "feature": "category_entertainment",
+        "value": 0.0,
+        "log_odds": -1.7616
+       }
+      ]
+     }
+    ],
+    "grounded": false,
+    "repaired": true,
+    "tool_calls": [
+     {
+      "server": "fraud-scoring",
+      "tool": "score_transaction",
+      "arguments": {
+       "timestamp": "2026-03-02T15:00:00Z",
+       "amount": 1200,
+       "category": "travel",
+       "city": "Recife",
+       "card_id": "card_0005"
+      },
+      "ok": true,
+      "seconds": 0.018,
+      "error": null
+     }
+    ],
+    "model": "qwen2.5:3b",
+    "llm_calls": 4,
+    "prompt_tokens": 3455,
+    "completion_tokens": 693,
+    "seconds": 114.68
+   }
+  }
+ ]
+}

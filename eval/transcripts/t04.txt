@@ -1,0 +1,11 @@
+Q: Card card_0005 bought a R$ 1,200.00 travel ticket in Recife at 2026-03-02T15:00:00. What does the fraud model say?
+
+The fraud model does not flag this transaction. The probability of it being fraudulent is 0.095215, which is below the threshold of 0.562504. The top reasons for not flagging this transaction are the distance from the home city (home_city) and the time since the last transaction (time_since_last_tx), which are both below the threshold. The category of the transaction (category_travel) is also a significant factor in not flagging this transaction.
+
+[rejected] home_city: chunk_id was not returned by any tool
+[rejected] distance_km_from_home: chunk_id was not returned by any tool
+[rejected] time_since_last_tx: chunk_id was not returned by any tool
+[rejected] category_travel: chunk_id was not returned by any tool
+[fraud model] p=0.095 flagged=False threshold=0.563; distance_km_from_home=1640.97 (+2.50), time_since_last_tx=99999 (-1.86), category_entertainment=0 (-1.76)
+
+grounded=False | tools: score_transaction | qwen2.5:3b, 4 LLM calls, 114.7s

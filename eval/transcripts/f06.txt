@@ -1,0 +1,14 @@
+Q: What does Pfizer say about patent expirations and loss of exclusivity?
+
+Pfizer Inc. says that the loss, expiration or invalidation of intellectual property rights, patent litigation settlements and judgments, and the expiration of co-promotion and licensing rights can have a material adverse effect on their revenues. They also mention that certain of their products have experienced patent-based expirations or loss of regulatory exclusivity in certain markets in the last few years, and they expect certain products to face new or increased generic competition over the next few years. They anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of their in-line products experience these expirations. Pfizer Inc. also notes that they expect the rate of the reduction of revenues from patent-based or regulatory exclusivity expiries to significantly accelerate over the next few years. They anticipate that revenues from patent-based or regulatory exclusivity expiries will be $1.5 billion in 2026.
+
+[1] Pfizer Inc (PFE) 10-K 2026-02-26, mda, PFE-2026-02-26-mda-016
+    "We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations, with the rate of the reduction of revenues from patent-based or regulatory exclusivity expiries expected to significantly accelerate over the next few years."
+[2] Pfizer Inc (PFE) 10-K 2026-02-26, business, PFE-2026-02-26-business-037
+    "Loss of Intellectual Property Rights. The loss, expiration or invalidation of intellectual property rights, patent litigation settlements and judgments and the expiration of co-promotion and licensing rights can have a material adverse effect on our revenues."
+[3] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-007
+    "In addition, competition from manufacturers of generic drugs, including from generic versions of competitors’ branded products that lose their market exclusivity, is a major challenge for our branded products. Certain of our products have experienced significant generic competition over the last few years."
+[4] Pfizer Inc (PFE) 10-K 2026-02-26, risk_factors, PFE-2026-02-26-risk_factors-011
+    "We anticipate a significant reduction of revenue from patent-based or regulatory exclusivity expiries in 2026 through 2030 as several of our in-line products experience these expirations. In addition, patents covering a number of our best-selling products are, or have been, the subject of pending legal challenges."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 190.0s

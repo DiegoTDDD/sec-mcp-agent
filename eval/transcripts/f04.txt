@@ -1,0 +1,16 @@
+Q: How does JPMorgan Chase describe its cybersecurity risk?
+
+[{"chunk_id": "JPM-2026-02-13-mda-341", "quote": "The governance structure for the Global Cybersecurity and Technology Controls organization is designed to appropriately identify, escalate and mitigate cybersecurity risks."},
+{"chunk_id": "JPM-2026-02-13-mda-337", "quote": "The Global Chief Information Security Officer (“CISO”) reports to the Global Chief Information Officer, and is a member of key cybersecurity governance forums."},
+{"chunk_id": "JPM-2026-02-13-mda-336", "quote": "Risks from cybersecurity threats, including any previous cybersecurity events, have not materially affected the Firm or its business strategy, results of operations or financial condition."},
+{"chunk_id": "JPM-2026-02-13-mda-343", "quote": "As part of its oversight of management’s implementation and maintenance of the Firm’s risk management framework, the Firm’s Board of Directors receives periodic updates from the CIO, the CISO and senior members of the CTOC concerning cybersecurity matters."},
+{"chunk_id": "JPM-2026-02-13-mda-335", "quote": "Third parties with which the Firm does business, that facilitate the Firm’s business activities (e.g., vendors, supply chain, exchanges, clearing houses, central depositories, and financial intermediaries) or that the Firm has acquired are also sources of cybersecurity risk to the Firm."},
+{"chunk_id": "JPM-2026-02-13-mda-335", "quote": "Clients and customers are also sources of cybersecurity risk to the Firm and its information assets, particularly when their activities and systems are beyond the Firm’s own security and control systems."},
+{"chunk_id": "JPM-2026-02-13-mda-341", "quote": "The governance structure for the Global Cybersecurity and Technology Controls organization is designed to appropriately identify, escalate and mitigate cybersecurity risks."},
+{"chunk_id": "JPM-2026-02-13-mda-337", "quote": "The Global Chief Information Security Officer (“CISO”) reports to the Global Chief Information Officer, and is a member of key cybersecurity governance forums."},
+{"chunk_id": "JPM-2026-02-13-mda-336", "quote": "Risks from cybersecurity threats, including any previous cybersecurity events, have not materially affected the Firm or its business strategy, results of operations or financial condition."},
+{"chunk_id": "JPM-2026-02-13-mda-343", "quote": "As part of its oversight of management’s implementation and maintenance of the Firm’s risk management framework, the Firm’s Board of Directors receives periodic updates from the CIO, the CISO and senior members of the CTOC concerning cybersecurity matters."},
+{"chunk_id": "JPM-2026-02-13-mda-335", "quote": "Third parties with which the Firm does business, that facilitate the Firm’s business activities (e.g., vendors, supply chain, exchanges, clearing houses, central depositories, and financial intermediaries) or that the Firm has acquired are also sources of cybersecurity risk to the Firm."}]
+
+
+grounded=False | tools: search_filings | qwen2.5:3b, 4 LLM calls, 285.5s

@@ -1,0 +1,16 @@
+Q: What does Toyota list as the main risk factors in its latest 10-K?
+
+The main risk factors listed by Apple Inc. in their latest 10-K filing include Macroeconomic and Industry Risks, Financial Risks, Credit Risk, and Financial Performance Risks. Specifically, the document mentions that the Company's investments can be negatively affected by changes in liquidity, credit deterioration, financial results, market and economic conditions, political risk, sovereign risk, interest rate fluctuations or other factors. The value and liquidity of the Company's cash, cash equivalents, and marketable securities may fluctuate substantially. The Company's gross margins vary significantly across its products, services, geographic segments and distribution channels and can change over time. The Company's financial performance is subject to risks associated with changes in the value of the U.S. dollar relative to local currencies. Further, the Company generates a significant portion of its net sales from a single product category and certain of the Company's services, including third-party licensing arrangements, contribute significantly to the Company's results of operations. A decline in demand for that product and those services, or an unfavorable change in the Company's services offerings, including its third-party licensing arrangements, could significantly impact the Company's net sales, gross margins and results of operations.
+
+[1] Apple Inc. (AAPL) 10-K 2026-11-03, risk_factors, AAPL-2026-11-03-risk_factors-000
+    "Item 1A. Risk Factors The following summarizes factors that could have a material adverse effect on the Company’s business, reputation, results of operations, financial condition and stock price."
+[2] Apple Inc. (AAPL) 10-K 2026-11-03, risk_factors, AAPL-2026-11-03-risk_factors-087
+    "The Company’s investments can be negatively affected by changes in liquidity, credit deterioration, financial results, market and economic conditions, political risk, sovereign risk, interest rate fluctuations or other factors."
+[3] Apple Inc. (AAPL) 10-K 2026-11-03, risk_factors, AAPL-2026-11-03-risk_factors-082
+    "The Company is also subject to new and changing laws, regulations and other legal obligations regarding online safety, including enhanced protections for minors, and mandatory age verification requirements."
+[4] Apple Inc. (AAPL) 10-K 2026-11-03, risk_factors, AAPL-2026-11-03-risk_factors-084
+    "These and other factors could have a material adverse effect on the Company’s business, results of operations, financial condition and stock price."
+[5] Apple Inc. (AAPL) 10-K 2026-11-03, mda, AAPL-2026-11-03-mda-007
+    "The Company’s future gross margins can be impacted by a variety of factors, as discussed in Part I, Item 1A of this Form 10-K under the heading “Risk Factors.” As a result, the Company believes, in general, gross margins will be subject to volatility and downward pressure."
+
+grounded=True | tools: search_filings (error), search_filings | qwen2.5:3b, 4 LLM calls, 250.6s

@@ -1,0 +1,8 @@
+Q: What does Amazon's MD&A say about AWS sales?
+
+The increase in AWS operating income in 2025, compared to the prior year, is primarily due to increased sales, partially offset by spending on technology infrastructure that was primarily driven by additional investments to support AWS business growth. Changes in foreign exchange rates negatively impacted operating income by $341 million in 2025.
+
+[1] Amazon Com Inc (AMZN) 10-K 2026-02-06, mda, AMZN-2026-02-06-mda-031
+    "Costs to operate our AWS segment are primarily classified as “Technology and infrastructure” as we leverage a shared infrastructure that supports both our internal technology requirements and external sales to AWS customers."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 3 LLM calls, 126.6s
