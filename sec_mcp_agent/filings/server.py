@@ -42,7 +42,10 @@ def resolve_section(value: str | None) -> str | None:
         return "mda"
     if v.startswith("business") or v in {"item1", "1"}:
         return "business"
-    raise ToolError(f"Unknown section {value!r}. Use one of: {', '.join(SECTIONS)}, or omit it.")
+    # Anything else ("R&D", "competition", "CONTRACTORS"...) is not a 10-K section we index:
+    # search them all rather than fail. Replaying the model's real calls (llm-evals-observability)
+    # showed these were most of the calls still rejected after the first fixes.
+    return None
 
 
 def resolve_ticker(value: str | None, companies: dict[str, str]) -> str | None:

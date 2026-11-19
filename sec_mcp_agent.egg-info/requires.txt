@@ -1,0 +1,17 @@
+mcp<3,>=2.3
+pydantic>=2.10
+rank-bm25>=0.2.2
+ollama>=0.6
+xgboost>=2.1
+scikit-learn>=1.5
+pandas>=2.2
+joblib>=1.4
+
+[data]
+edgartools==5.40.1
+pyarrow>=17
+
+[dev]
+pytest>=8
+anyio>=4
+ruff>=0.6

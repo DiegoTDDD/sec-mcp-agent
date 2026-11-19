@@ -90,7 +90,8 @@ async def test_search_tool_returns_structured_hits(index):
     ("written", "section"),
     [("RISK FACTORS", "risk_factors"), ("Item 1A. Risk Factors", "risk_factors"),
      ("MD&A", "mda"), ("Management's Discussion and Analysis", "mda"), ("MDA", "mda"),
-     ("Business", "business"), ("", None), (None, None)],
+     ("Business", "business"), ("", None), (None, None), ("R&D", None),
+     ("competition", None)],
 )  # fmt: skip
 def test_section_names_models_write_are_understood(written, section):
     from sec_mcp_agent.filings.server import resolve_section
@@ -106,8 +107,11 @@ async def test_company_names_and_lowercase_tickers_resolve(index):
             )
             assert not res.is_error
             assert {h["ticker"] for h in res.structured_content["result"]} == {"AAPL"}
-        bad = await client.call_tool("search_filings", {"query": "x", "section": "R&D"})
-        assert bad.is_error and "risk_factors" in bad.content[0].text
+        invented = await client.call_tool(
+            "search_filings", {"query": "tariffs", "section": "R&D", "ticker": "AAPL"}
+        )
+        assert not invented.is_error  # an unknown section searches every section
+        assert invented.structured_content["result"]
 
 
 async def test_unknown_ticker_is_a_tool_error_the_model_can_read(index):

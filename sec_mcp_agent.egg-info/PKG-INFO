@@ -1,0 +1,131 @@
+Metadata-Version: 2.4
+Name: sec-mcp-agent
+Version: 1.0.0
+Summary: MCP servers over SEC 10-K filings and a fraud model, and a local tool-calling agent with verified citations.
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: mcp<3,>=2.3
+Requires-Dist: pydantic>=2.10
+Requires-Dist: rank-bm25>=0.2.2
+Requires-Dist: ollama>=0.6
+Requires-Dist: xgboost>=2.1
+Requires-Dist: scikit-learn>=1.5
+Requires-Dist: pandas>=2.2
+Requires-Dist: joblib>=1.4
+Provides-Extra: data
+Requires-Dist: edgartools==5.40.1; extra == "data"
+Requires-Dist: pyarrow>=17; extra == "data"
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: anyio>=4; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+Dynamic: license-file
+
+# sec-mcp-agent
+
+[![tests](https://github.com/DiegoTDDD/sec-mcp-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/DiegoTDDD/sec-mcp-agent/actions/workflows/tests.yml)
+[![eval](https://github.com/DiegoTDDD/sec-mcp-agent/actions/workflows/eval.yml/badge.svg)](https://github.com/DiegoTDDD/sec-mcp-agent/actions/workflows/eval.yml)
+
+Two MCP servers, one over SEC 10-K filings and one over a fraud model, and a tool-calling
+agent that answers from them with **verified citations**. Everything runs locally and free: a
+3B model served by Ollama, BM25 search, and the XGBoost model from
+[realtime-fraud-detection-ml](https://github.com/DiegoTDDD/realtime-fraud-detection-ml). The
+same servers plug into Claude Desktop.
+
+## Problem
+
+LLM answers about filings are only useful if every claim can be traced to the source, and
+small models invent sources that look real. Tools are also usually wired into one agent, so
+nothing else can use them.
+
+## Solution
+
+```
+                 ┌──────────────────────────── MCP (stdio or in-memory) ───────────────────────────┐
+question ──► Agent ──► tool calls ──► sec-filings server     search_filings · get_chunk · list_companies
+   │            │                     (BM25 over 10-K chunks)  filing://{ticker}/{section} · risk_review prompt
+   │            │
+   │            └────► tool calls ──► fraud-scoring server   score_transaction (+ TreeSHAP reasons)
+   │                                  (XGBoost, same features   fraud://model-card
+   │                                   as training, by test)
+   ▼
+JSON answer (schema-constrained) ──► citation verifier ──► AgentAnswer
+                                     chunk_id retrieved?      answer, verified citations,
+                                     quote word for word?     rejected citations, grounded,
+                                     one repair round         fraud scores, tool trace, tokens
+```
+
+- **MCP servers** built on the official Python SDK 2.x, with tools, resources and a prompt;
+  every tool is read-only and returns structured output.
+- **Agent** discovers tools from every server, loops on tool calls (step limit), then produces
+  the final answer under a JSON schema (Pydantic).
+- **Citation verifier**: a citation counts only if its passage was actually retrieved in this
+  run and the quote is in it word for word; otherwise the model gets one repair round, and what
+  still fails is reported, never passed through.
+- **Fraud tool parity**: the model is trained by the fraud project's own code at a pinned
+  commit, and a check rebuilds 2,000 training rows as tool calls: features match to 2e-13 and
+  probabilities to 5e-7. It caught a sub-second mismatch in the tool's first version (ADR 0003).
+
+## Results
+
+<!-- EVAL:START -->
+The first evaluation run is in progress on GitHub Actions; this section is filled from
+`eval/results.md` when it finishes.
+<!-- EVAL:END -->
+
+## Use it
+
+```bash
+python -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt -r requirements-dev.txt
+
+export SEC_IDENTITY="Your Name you@example.com"   # SEC requires it of automated clients
+python scripts/build_index.py                     # data/chunks.jsonl: 20 companies, latest 10-K
+bash scripts/build_fraud_model.sh                 # models/fraud/ + feature parity check
+
+ollama pull qwen2.5:3b
+python -m sec_mcp_agent "What does NVIDIA report about US export controls?"
+python -m sec_mcp_agent "Card card_0001 spent R$ 4,850 on electronics in Manaus at 2026-03-01T03:12:00. Fraud?"
+python scripts/run_eval.py                        # eval/results.md
+```
+
+**Claude Desktop**: copy `claude_desktop_config.example.json` into Claude Desktop's config,
+replacing the paths. Both servers then appear as tools, the `filing://` resources can be
+attached to a chat, and `risk_review` shows up as a prompt.
+
+## Tests
+
+`pytest -q -p anyio`: 48 tests. Every tool goes through a real MCP client (listing, schemas,
+structured results, validation errors); fraud features follow the training definitions
+(window edges, second truncation, unknown inputs); the agent loop runs with a scripted model
+through tool errors, unknown tools, the step limit, invalid JSON and fabricated or repaired
+citations. CI also starts both servers over stdio.
+
+## Design decisions
+
+- [ADR 0001](docs/adr/0001-mcp-servers-as-the-tool-boundary.md): tools as MCP servers, not functions inside the agent.
+- [ADR 0002](docs/adr/0002-bm25-search.md): BM25 inside the server instead of the hybrid retriever.
+- [ADR 0003](docs/adr/0003-fraud-tool-reuses-the-training-features.md): the fraud tool reproduces the training features, proven by a parity check.
+- [ADR 0004](docs/adr/0004-verify-citations.md): verify every citation against retrieved passages.
+- [ADR 0005](docs/adr/0005-local-model-with-ollama.md): a local model through Ollama behind a one-method interface.
+
+## Limits
+
+- The verifier proves a quote exists in a retrieved passage, not that it supports the claim.
+- BM25 misses paraphrases; the agent retries with other words, and the eval shows where that
+  is not enough.
+- A 3B model on a CPU is slow (tens of seconds per question) and makes tool-use mistakes; the
+  eval reports them.
+- The fraud model is only as good as its training: it under-flags impossible travel when a
+  card has no recent history, and the tool reports that honestly with its reasons.
+
+## Stack
+
+Python 3.11, MCP Python SDK 2.x, Pydantic, Ollama (qwen2.5:3b), rank-bm25, XGBoost,
+edgartools, pytest, ruff, GitHub Actions.
+
+## License
+
+MIT
