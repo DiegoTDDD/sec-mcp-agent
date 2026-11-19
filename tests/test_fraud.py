@@ -143,3 +143,26 @@ async def test_model_card_resource(fraud_model):
         res = await client.read_resource("fraud://model-card")
         assert '"threshold": 0.5' in res.contents[0].text
         assert '"pr_auc": 0.99' in res.contents[0].text
+
+
+def test_utc_and_naive_timestamps_are_the_same_transaction(fraud_model):
+    aware = tx(fraud_model, timestamp="2026-03-01T14:30:00Z")
+    naive = tx(fraud_model, timestamp="2026-03-01T14:30:00")
+    offset = tx(fraud_model, timestamp="2026-03-01T11:30:00-03:00")
+    assert aware == naive == offset
+    assert fraud_model.features(aware) == fraud_model.features(naive)
+
+
+async def test_previous_times_as_one_comma_separated_string(fraud_model):
+    async with Client(build_server(fraud_model)) as client:
+        args = {
+            "card_id": "card_0000",
+            "amount": 3.5,
+            "category": "groceries",
+            "city": fraud_model.home_city["card_0000"],
+            "timestamp": "2026-03-01T10:01:25",
+            "previous_timestamps": "2026-03-01T10:00:00, 2026-03-01T10:01:02",
+        }
+        res = await client.call_tool("score_transaction", args)
+        assert not res.is_error
+        assert res.structured_content["features"]["tx_count_last_5min"] == 2

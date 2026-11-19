@@ -17,14 +17,14 @@ from __future__ import annotations
 import json
 import math
 import unicodedata
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 import joblib
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # Same coordinates as realtime-fraud-detection-ml/training/train_model.py.
 CITY_COORDS = {
@@ -70,6 +70,18 @@ class Transaction(BaseModel):
         default_factory=list,
         description="Times of the card's earlier transactions, if known (for velocity features)",
     )
+
+    @field_validator("timestamp")
+    @classmethod
+    def _utc_naive(cls, value: datetime) -> datetime:
+        """'2026-03-01T03:12:00Z' and '2026-03-01T03:12:00' are the same instant: training
+        timestamps are naive UTC, so aware ones are converted (eval run 3, question t04)."""
+        return value.astimezone(UTC).replace(tzinfo=None) if value.tzinfo else value
+
+    @field_validator("previous_timestamps")
+    @classmethod
+    def _utc_naive_list(cls, values: list[datetime]) -> list[datetime]:
+        return [cls._utc_naive(v) for v in values]
 
 
 class Contribution(BaseModel):

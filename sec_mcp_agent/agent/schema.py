@@ -8,10 +8,12 @@ from pydantic import BaseModel, Field
 
 
 class CitationDraft(BaseModel):
-    """A citation as the model writes it: a chunk id and a word-for-word quote."""
+    """A citation as the model writes it: a chunk id and, ideally, a word-for-word quote."""
 
     chunk_id: str = Field(description="chunk_id of a passage returned by a tool")
-    quote: str = Field(description="One sentence copied word for word from that passage")
+    quote: str = Field(
+        default="", description="One sentence copied word for word from that passage, if you can"
+    )
 
 
 class AnswerDraft(BaseModel):
@@ -28,6 +30,11 @@ class Citation(BaseModel):
     filing_date: str
     section: str
     quote: str
+    quote_source: str = Field(
+        description="model: the model's quote was found word for word in the passage; "
+        "selected: the model's quote was not exact, so the verifier chose the passage sentence "
+        "closest to the answer"
+    )
 
 
 class RejectedCitation(BaseModel):

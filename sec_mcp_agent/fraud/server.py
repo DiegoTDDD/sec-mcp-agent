@@ -32,6 +32,15 @@ from sec_mcp_agent.fraud.model import (
 DEFAULT_MODEL_DIR = Path("models/fraud")
 
 
+def split_times(value: list[str] | str | None) -> list[str]:
+    """Models sometimes send the list as one comma-separated string (eval run 3, t03)."""
+    if not value:
+        return []
+    if isinstance(value, str):
+        return [t.strip() for t in value.split(",") if t.strip()]
+    return value
+
+
 def build_server(model: FraudModel) -> MCPServer:
     server = MCPServer(
         "fraud-scoring",
@@ -49,7 +58,7 @@ def build_server(model: FraudModel) -> MCPServer:
         city: Annotated[str, Field(description="City of the purchase, e.g. Manaus")],
         timestamp: Annotated[str, Field(description="When it happened, ISO 8601")],
         previous_timestamps: Annotated[
-            list[str] | None,
+            list[str] | str | None,
             Field(description="Optional: ISO 8601 times of the card's earlier purchases"),
         ] = None,
     ) -> FraudScore:
@@ -64,7 +73,7 @@ def build_server(model: FraudModel) -> MCPServer:
                 category=category.strip().lower(),
                 city=canonical_city(city),
                 timestamp=timestamp,
-                previous_timestamps=previous_timestamps or [],
+                previous_timestamps=split_times(previous_timestamps),
             )
             return model.score(transaction)
         except (ValueError, ValidationError) as exc:

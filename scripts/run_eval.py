@@ -31,17 +31,24 @@ from sec_mcp_agent.agent.schema import AgentAnswer  # noqa: E402
 from sec_mcp_agent.filings.corpus import load_chunks  # noqa: E402
 from sec_mcp_agent.filings.search import FilingsIndex  # noqa: E402
 from sec_mcp_agent.filings.server import build_server as filings_server  # noqa: E402
+from sec_mcp_agent.filings.server import resolve_company  # noqa: E402
 from sec_mcp_agent.fraud.model import FraudModel, Transaction  # noqa: E402
 from sec_mcp_agent.fraud.server import build_server as fraud_server  # noqa: E402
 
 EVAL = ROOT / "eval"
 
 
+def searched_ticker(arguments: dict, index: FilingsIndex) -> str | None:
+    """The company filter the server actually applied to a search_filings call."""
+    try:
+        return resolve_company(arguments.get("query", ""), arguments.get("ticker"), index.companies)
+    except Exception:  # an unknown ticker was an error, so no filter was applied
+        return None
+
+
 def score_filings(q: dict, a: AgentAnswer, index: FilingsIndex) -> dict[str, Any]:
     searched = any(
-        t.tool == "search_filings"
-        and t.ok
-        and (t.arguments.get("ticker") or "").upper() == q["ticker"]
+        t.tool == "search_filings" and t.ok and searched_ticker(t.arguments, index) == q["ticker"]
         for t in a.tool_calls
     )
     on_target = [c for c in a.citations if c.ticker == q["ticker"]]
@@ -122,6 +129,18 @@ def summarize(rows: list[dict]) -> dict[str, Any]:
         "citation_precision": round(statistics.mean(on_target), 3) if on_target else None,
         "rejected_citations": sum(r["rejected_citations"] for r in rows),
         "repaired_answers": sum(r["repaired"] for r in rows),
+        "quotes_from_model": sum(
+            c["quote_source"] == "model"
+            for r in rows
+            if r["answer"]
+            for c in r["answer"]["citations"]
+        ),
+        "quotes_selected": sum(
+            c["quote_source"] == "selected"
+            for r in rows
+            if r["answer"]
+            for c in r["answer"]["citations"]
+        ),
         "out_of_scope_pass_rate": rate("out_of_scope", "passed"),
         "fraud_exact_arguments_rate": rate("fraud", "exact_arguments"),
         "median_seconds": round(statistics.median(r["seconds"] for r in rows), 1),
@@ -146,8 +165,9 @@ def write_markdown(summary: dict, rows: list[dict], model: str, path: Path) -> N
         f"| Citation precision (citations on the asked company) | {pct(summary['citation_precision'])} |",
         f"| Out-of-scope questions answered without citing anything | {pct(summary['out_of_scope_pass_rate'])} |",
         f"| Fraud questions scored with exactly the stated transaction | {pct(summary['fraud_exact_arguments_rate'])} |",
-        f"| Answers sent back once by the citation verifier | {summary['repaired_answers']} |",
+        f"| Answers sent back once for an invented chunk_id | {summary['repaired_answers']} |",
         f"| Citations still rejected after that | {summary['rejected_citations']} |",
+        f"| Quotes copied exactly by the model / selected from the cited passage | {summary['quotes_from_model']} / {summary['quotes_selected']} |",
         f"| Median / p90 latency per question | {summary['median_seconds']} s / {summary['p90_seconds']} s |",
         f"| Mean tool calls per question | {summary['mean_tool_calls']} |",
         f"| Total tokens | {summary['total_tokens']:,} |",

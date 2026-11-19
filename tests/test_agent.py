@@ -61,20 +61,34 @@ async def test_model_sees_every_tool_from_both_servers(servers):
     assert llm.calls[-1]["schema"]["title"] == "AnswerDraft"
 
 
-async def test_fabricated_citation_is_repaired_or_rejected(servers):
+async def test_inexact_quote_on_a_retrieved_passage_is_replaced_by_a_real_sentence(servers):
+    llm = ScriptedChat([
+        search("tariffs", ticker="AAPL"),
+        ChatReply(content="done"),
+        lambda msgs: final("Tariffs could reduce margins.",
+                           (first_chunk_id(msgs), "Tariffs will double next year.")),
+    ])  # fmt: skip
+    answer = await Agent(servers, llm).ask("Apple tariffs?")
+    [c] = answer.citations
+    assert answer.grounded and not answer.repaired
+    # A real sentence of the passage, the one closest to the answer, not the invented quote.
+    assert c.quote_source == "selected"
+    assert c.quote == (
+        "New or increased tariffs on the Company's products or components could reduce "
+        "gross margins and demand."
+    )
+
+
+async def test_exact_quote_is_kept_as_the_model_wrote_it(servers):
     llm = ScriptedChat(
         [
             search("tariffs", ticker="AAPL"),
             ChatReply(content="done"),
-            lambda msgs: final(
-                "Tariffs.", (first_chunk_id(msgs), "Tariffs will double next year.")
-            ),
-            lambda msgs: final("Tariffs.", (first_chunk_id(msgs), QUOTE)),  # the repair round
+            lambda msgs: final("x", (first_chunk_id(msgs), QUOTE)),
         ]
     )
-    answer = await Agent(servers, llm).ask("Apple tariffs?")
-    assert answer.grounded and len(answer.citations) == 1
-    assert "do not match" in llm.calls[-1]["messages"][-1]["content"]
+    [c] = (await Agent(servers, llm).ask("q")).citations
+    assert c.quote_source == "model" and c.quote == QUOTE
 
 
 async def test_citation_that_stays_wrong_is_reported_not_passed_through(servers):
@@ -173,17 +187,27 @@ async def test_invalid_json_gets_one_retry_then_falls_back_to_text(servers):
     assert "not valid JSON" in llm.calls[-1]["messages"][-1]["content"]
 
 
-async def test_repair_round_is_recorded(servers):
-    llm = ScriptedChat(
-        [
-            search("tariffs", ticker="AAPL"),
-            ChatReply(content="done"),
-            lambda m: final("x", (first_chunk_id(m), "Not in the passage at all, no.")),
-            lambda m: final("x", (first_chunk_id(m), QUOTE)),
-        ]
-    )
+async def test_invented_chunk_id_gets_one_repair_round(servers):
+    llm = ScriptedChat([
+        search("tariffs", ticker="AAPL"),
+        ChatReply(content="done"),
+        final("x", ("AAPL-made-up-000", QUOTE)),
+        lambda m: final("x", (first_chunk_id(m), QUOTE)),
+    ])  # fmt: skip
     answer = await Agent(servers, llm).ask("q")
-    assert answer.repaired and answer.grounded
+    assert answer.repaired and answer.grounded and len(answer.citations) == 1
+    assert "AAPL-made-up-000" in llm.calls[-1]["messages"][-1]["content"]
+
+
+async def test_citations_valid_before_the_repair_are_kept(servers):
+    llm = ScriptedChat([
+        search("tariffs", ticker="AAPL"),
+        ChatReply(content="done"),
+        lambda m: final("x", (first_chunk_id(m), QUOTE), ("BAD-ID", "nothing")),
+        final("x"),  # the model drops everything when asked to fix one
+    ])  # fmt: skip
+    answer = await Agent(servers, llm).ask("q")
+    assert answer.repaired and len(answer.citations) == 1 and answer.grounded
 
 
 async def test_model_that_skips_tools_is_reminded_once(servers):

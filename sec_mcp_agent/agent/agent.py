@@ -30,6 +30,7 @@ from sec_mcp_agent.agent.schema import (
     RejectedCitation,
     ToolCallRecord,
 )
+from sec_mcp_agent.filings.search import tokenize
 
 SYSTEM_PROMPT = """You answer questions about US public companies' 10-K filings and about card \
 transactions, using only the tools you are given.
@@ -44,9 +45,9 @@ TOOL_REMINDER = """Do not answer from memory. Call the tools first: search_filin
 about companies, score_transaction for transactions. If no tool can help, say so."""
 
 FINAL_INSTRUCTION = """Now write the final answer as JSON with "answer" and "citations". Each \
-citation is {"chunk_id": "<a chunk_id returned by a tool>", "quote": "<one sentence copied word \
-for word from that passage>"}. Cite every passage you rely on. Use an empty list only if you \
-used no filings."""
+citation is {"chunk_id": "<a chunk_id returned by a tool>", "quote": "<a sentence copied from \
+that passage>"}. Cite every passage you rely on, using chunk_ids exactly as the tools gave them. \
+Use an empty list only if you used no filings."""
 
 MIN_QUOTE_CHARS = 20
 TOOL_TEXT_LIMIT = 6000
@@ -130,15 +131,18 @@ class Agent:
                     {
                         "role": "user",
                         "content": (
-                            "These citations do not match the retrieved passages: "
-                            + "; ".join(f"{r.chunk_id} ({r.reason})" for r in rejected)
-                            + ". Rewrite the JSON so every quote is copied exactly from a "
-                            "passage the tools returned, or drop the citation."
+                            "These chunk_ids were not returned by any tool: "
+                            + ", ".join(r.chunk_id for r in rejected)
+                            + ". Rewrite the JSON citing only chunk_ids that appear in the "
+                            "tool results above."
                         ),
                     }
                 )
                 draft = run.final_answer(messages)
+                kept = citations
                 citations, rejected = run.check(draft)
+                ids = {c.chunk_id for c in citations}
+                citations += [c for c in kept if c.chunk_id not in ids]
 
         used_filings = any(r.tool in {"search_filings", "get_chunk"} for r in run.records)
         grounded = not rejected and (bool(citations) or not used_filings)
@@ -259,34 +263,54 @@ class _Run:
                 return AnswerDraft(answer=reply.content.strip() or "No answer.", citations=[])
 
     def check(self, draft: AnswerDraft) -> tuple[list[Citation], list[RejectedCitation]]:
+        """Accept a citation only if its passage was retrieved in this run.
+
+        The quote shown to the reader is always real text from that passage: the model's own
+        quote when it is there word for word, otherwise the passage sentence closest to the
+        answer. Eval run 3 showed why: a 3B model picks the right passage far more reliably
+        than it copies a sentence exactly, and asking it to retry made it drop citations.
+        """
         valid: list[Citation] = []
         rejected: list[RejectedCitation] = []
-        seen: set[tuple[str, str]] = set()
+        seen: set[str] = set()
         for c in draft.citations:
-            passage = self.passages.get(c.chunk_id)
-            quote = normalize(c.quote)
+            passage = self.passages.get(c.chunk_id.strip())
             if passage is None:
                 reason = "chunk_id was not returned by any tool"
-            elif len(quote) < MIN_QUOTE_CHARS:
-                reason = "quote is too short to verify"
-            elif quote not in normalize(passage["text"]):
-                reason = "quote is not in the passage word for word"
-            else:
-                if (c.chunk_id, quote) not in seen:
-                    seen.add((c.chunk_id, quote))
-                    valid.append(
-                        Citation(
-                            chunk_id=c.chunk_id,
-                            ticker=passage["ticker"],
-                            company=passage["company"],
-                            filing_date=passage["filing_date"],
-                            section=passage["section"],
-                            quote=c.quote.strip(),
-                        )
-                    )
+                rejected.append(RejectedCitation(chunk_id=c.chunk_id, quote=c.quote, reason=reason))
                 continue
-            rejected.append(RejectedCitation(chunk_id=c.chunk_id, quote=c.quote, reason=reason))
+            if passage["chunk_id"] in seen:
+                continue
+            seen.add(passage["chunk_id"])
+            quote = normalize(c.quote)
+            if len(quote) >= MIN_QUOTE_CHARS and quote in normalize(passage["text"]):
+                text, source = c.quote.strip(), "model"
+            else:
+                text, source = (
+                    best_sentence(passage["text"], f"{draft.answer} {c.quote}"),
+                    "selected",
+                )
+            valid.append(
+                Citation(
+                    chunk_id=passage["chunk_id"],
+                    ticker=passage["ticker"],
+                    company=passage["company"],
+                    filing_date=passage["filing_date"],
+                    section=passage["section"],
+                    quote=text,
+                    quote_source=source,
+                )
+            )
         return valid, rejected
+
+
+def best_sentence(passage: str, target: str) -> str:
+    """The passage sentence sharing the most search terms with the answer."""
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", passage) if len(s.strip()) > 20]
+    if not sentences:
+        return passage.strip()[:300]
+    wanted = set(tokenize(target))
+    return max(sentences, key=lambda s: len(wanted & set(tokenize(s))))  # first wins on ties
 
 
 def to_json(answer: AgentAnswer) -> str:

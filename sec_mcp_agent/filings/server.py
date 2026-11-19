@@ -62,6 +62,42 @@ def resolve_ticker(value: str | None, companies: dict[str, str]) -> str | None:
     )
 
 
+GENERIC_WORDS = {"bank", "general", "international", "united", "american", "first", "the"}
+SUFFIXES = re.compile(
+    r"[,.]?\s+(inc|corp|corporation|co|company|ltd|plc|group|holdings)\b.*$", re.I
+)
+
+
+def company_aliases(ticker: str, name: str) -> list[str]:
+    """Lowercase phrases that name one company in a query: 'apple', 'jpmorgan chase',
+    'bank of america'. Generic first words ('bank', 'general') are not used alone."""
+    full = SUFFIXES.sub("", name).strip().lower().rstrip(" &,.")
+    aliases = {full}
+    first = full.split()[0] if full else ""
+    if len(first) >= 4 and first not in GENERIC_WORDS:
+        aliases.add(first)
+    return sorted(a for a in aliases if a)
+
+
+def detect_company(query: str, companies: dict[str, str]) -> str | None:
+    """The company a query names, when exactly one matches (by name, or by a ticker of two or
+    more capital letters). Eval run 3: the model often wrote "JPMorgan Chase cybersecurity risk"
+    with no ticker filter, and lexical search then drifted to other companies."""
+    lowered = query.lower()
+    found = set()
+    for ticker, name in companies.items():
+        if (len(ticker) >= 2 and re.search(rf"\b{re.escape(ticker)}\b", query)) or any(
+            re.search(rf"\b{re.escape(a)}\b", lowered) for a in company_aliases(ticker, name)
+        ):
+            found.add(ticker)
+    return found.pop() if len(found) == 1 else None
+
+
+def resolve_company(query: str, ticker: str | None, companies: dict[str, str]) -> str | None:
+    """The ticker filter search_filings applies: the explicit one, else one named in the query."""
+    return resolve_ticker(ticker, companies) or detect_company(query, companies)
+
+
 class Company(BaseModel):
     ticker: str
     company: str
@@ -110,11 +146,12 @@ def build_server(index: FilingsIndex) -> MCPServer:
         k: Annotated[int, Field(ge=1, le=10, description="Number of passages")] = 5,
     ) -> list[SearchHit]:
         """Search 10-K passages by keywords. Returns passages with chunk_id, company, filing
-        date, section and text, best match first."""
+        date, section and text, best match first. If no ticker is given and the query names
+        exactly one indexed company, results are restricted to that company."""
         return index.search(
             query,
             k=k,
-            ticker=resolve_ticker(ticker, index.companies),
+            ticker=resolve_company(query, ticker, index.companies),
             section=resolve_section(section),
         )
 

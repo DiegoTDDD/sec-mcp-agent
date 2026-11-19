@@ -159,3 +159,25 @@ def test_fixture_is_valid_json():
     from conftest import FIXTURES
 
     assert len(json.loads((FIXTURES / "filings.json").read_text())) == 5
+
+
+async def test_a_company_named_in_the_query_filters_the_search(index):
+    async with Client(build_server(index)) as client:
+        res = await client.call_tool("search_filings", {"query": "JPMorgan interest rates"})
+        assert {h["ticker"] for h in res.structured_content["result"]} == {"JPM"}
+        both = await client.call_tool(
+            "search_filings", {"query": "Apple tariffs and Exxon climate", "k": 10}
+        )
+        tickers = {h["ticker"] for h in both.structured_content["result"]}
+        assert tickers >= {"AAPL", "XOM"}  # two companies named: no filter applied
+
+
+def test_detect_company_ignores_generic_words_and_single_letter_tickers():
+    from sec_mcp_agent.filings.server import detect_company
+
+    companies = {"BAC": "Bank Of America Corp", "V": "Visa Inc.", "META": "Meta Platforms, Inc."}
+    assert detect_company("banks and interest rates", companies) is None
+    assert detect_company("V shaped recovery", companies) is None
+    assert detect_company("metadata retention", companies) is None
+    assert detect_company("Bank of America deposits", companies) == "BAC"
+    assert detect_company("visa fees", companies) == "V"
