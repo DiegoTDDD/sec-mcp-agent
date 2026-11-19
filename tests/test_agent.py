@@ -226,3 +226,34 @@ async def test_reminder_is_not_repeated(servers):
     llm = ScriptedChat([ChatReply(content="no"), ChatReply(content="still no"), final("Unknown.")])
     answer = await Agent(servers, llm).ask("q")
     assert answer.tool_calls == [] and answer.llm_calls == 3
+
+
+@pytest.mark.parametrize(
+    "nested",
+    [
+        lambda cid: json.dumps({"answer": "Tariffs hurt margins.",
+                                "citations": [{"chunk_id": cid, "quote": QUOTE}]}),
+        lambda cid: json.dumps([{"chunk_id": cid, "quote": QUOTE}]),
+        lambda cid: json.dumps([cid]),
+    ],
+)  # fmt: skip
+async def test_json_nested_in_the_answer_field_is_recovered(servers, nested):
+    llm = ScriptedChat([
+        search("tariffs", ticker="AAPL"),
+        ChatReply(content="done"),
+        lambda m: ChatReply(content=json.dumps({"answer": nested(first_chunk_id(m)),
+                                                "citations": []})),
+        final("Tariffs hurt margins."),  # only used when the answer text was missing
+    ])  # fmt: skip
+    answer = await Agent(servers, llm).ask("Apple tariffs?")
+    assert answer.grounded and len(answer.citations) == 1
+    assert answer.answer == "Tariffs hurt margins."
+    assert not answer.answer.startswith(("{", "["))
+
+
+def test_unwrap_leaves_ordinary_answers_alone():
+    from sec_mcp_agent.agent.agent import unwrap
+    from sec_mcp_agent.agent.schema import AnswerDraft
+
+    d = AnswerDraft(answer="[E2] shows tariffs matter.", citations=[])
+    assert unwrap(d) == d

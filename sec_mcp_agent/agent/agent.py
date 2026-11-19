@@ -27,6 +27,7 @@ from sec_mcp_agent.agent.schema import (
     AgentAnswer,
     AnswerDraft,
     Citation,
+    CitationDraft,
     RejectedCitation,
     ToolCallRecord,
 )
@@ -39,6 +40,8 @@ transactions, using only the tools you are given.
 named) before answering. Search again with other words if the passages do not answer the question.
 - For questions about a transaction, call score_transaction and report the probability, whether \
 it is flagged and the top reasons.
+- If a tool says a company is not in the index, do not search other companies for it: answer \
+that the filings available do not cover that company.
 - Never invent facts, numbers or chunk_ids. If the tools do not answer the question, say so."""
 
 TOOL_REMINDER = """Do not answer from memory. Call the tools first: search_filings for questions \
@@ -245,7 +248,7 @@ class _Run:
         schema = AnswerDraft.model_json_schema()
         reply = self.chat(messages, schema=schema)
         try:
-            return AnswerDraft.model_validate_json(reply.content)
+            draft = unwrap(AnswerDraft.model_validate_json(reply.content))
         except ValidationError as exc:
             retry = [
                 *messages,
@@ -258,9 +261,25 @@ class _Run:
             ]
             reply = self.chat(retry, schema=schema)
             try:
-                return AnswerDraft.model_validate_json(reply.content)
+                draft = unwrap(AnswerDraft.model_validate_json(reply.content))
             except ValidationError:
                 return AnswerDraft(answer=reply.content.strip() or "No answer.", citations=[])
+        if not draft.answer.strip():
+            # The model put only citations in the answer field: ask for the prose once.
+            retry = [
+                *messages,
+                {"role": "assistant", "content": reply.content},
+                {"role": "user", "content": "The answer field must be the answer in plain "
+                 "sentences; chunk_ids and quotes go in citations. Write the JSON again."},
+            ]  # fmt: skip
+            again = self.chat(retry, schema=schema)
+            try:
+                fixed = unwrap(AnswerDraft.model_validate_json(again.content))
+                draft = AnswerDraft(answer=fixed.answer or "No answer.",
+                                    citations=fixed.citations or draft.citations)  # fmt: skip
+            except ValidationError:
+                draft = AnswerDraft(answer="No answer.", citations=draft.citations)
+        return draft
 
     def check(self, draft: AnswerDraft) -> tuple[list[Citation], list[RejectedCitation]]:
         """Accept a citation only if its passage was retrieved in this run.
@@ -311,6 +330,41 @@ def best_sentence(passage: str, target: str) -> str:
         return passage.strip()[:300]
     wanted = set(tokenize(target))
     return max(sentences, key=lambda s: len(wanted & set(tokenize(s))))  # first wins on ties
+
+
+def unwrap(draft: AnswerDraft) -> AnswerDraft:
+    """Recover from JSON nested inside the answer field.
+
+    Eval run 4: in 8 failed questions qwen2.5:3b wrote the whole answer object, a citation list
+    or a list of chunk_ids as a string inside "answer", so the schema passed with no citations.
+    """
+    text = draft.answer.strip()
+    if not text.startswith(("{", "[")):
+        return draft
+    try:
+        inner = json.loads(text)
+    except json.JSONDecodeError:
+        return draft
+    if isinstance(inner, dict) and ("answer" in inner or "citations" in inner):
+        nested = unwrap(AnswerDraft(answer=str(inner.get("answer") or ""), citations=[]))
+        cites = draft.citations or _citations(inner.get("citations")) or nested.citations
+        return AnswerDraft(answer=nested.answer, citations=cites)
+    if isinstance(inner, dict) and not inner:
+        return AnswerDraft(answer="", citations=draft.citations)
+    if isinstance(inner, list):
+        return AnswerDraft(answer="", citations=draft.citations or _citations(inner))
+    return draft
+
+
+def _citations(items: Any) -> list[CitationDraft]:
+    out = []
+    for item in items if isinstance(items, list) else []:
+        if isinstance(item, str):
+            out.append(CitationDraft(chunk_id=item))
+        elif isinstance(item, dict) and item.get("chunk_id"):
+            out.append(CitationDraft(chunk_id=str(item["chunk_id"]),
+                                     quote=str(item.get("quote") or "")))  # fmt: skip
+    return out
 
 
 def to_json(answer: AgentAnswer) -> str:
