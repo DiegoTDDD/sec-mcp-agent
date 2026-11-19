@@ -1,0 +1,14 @@
+Q: How does JPMorgan Chase describe its cybersecurity risk?
+
+JPMorgan Chase & Co describes its cybersecurity risk governance structure, with the Global Chief Information Security Officer reporting to the Global Chief Information Officer and being a member of key cybersecurity governance forums. The Firm's Board of Directors receives periodic updates from the CIO, the CISO, and senior members of the CTOC concerning cybersecurity matters. Risks from cybersecurity threats have not materially affected the Firm or its business strategy, results of operations or financial condition. The Firm engages in periodic discussions with clients, customers, and other external parties concerning cybersecurity risks including opportunities to improve cybersecurity.
+
+[1] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, mda, JPM-2026-02-13-mda-341
+    "Cybersecurity risk management and its governance and oversight are integrated into the Firm’s operational risk management framework, including through the escalation of key risk and control issues to management and the development of risk mitigation plans for heightened risk and control issues."
+[2] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, mda, JPM-2026-02-13-mda-337
+    "The Global Chief Information Security Officer (“CISO”) reports to the Global Chief Information Officer, and is a member of key cybersecurity governance forums."
+[3] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, mda, JPM-2026-02-13-mda-336
+    "Risks from cybersecurity threats, including any previous cybersecurity events, have not materially affected the Firm or its business strategy, results of operations or financial condition."
+[4] Jpmorgan Chase & Co (JPM) 10-K 2026-02-13, mda, JPM-2026-02-13-mda-343
+    "As part of its oversight of management’s implementation and maintenance of the Firm’s risk management framework, the Firm’s Board of Directors receives periodic updates from the CIO, the CISO and senior members of the CTOC concerning cybersecurity matters."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 4 LLM calls, 102.6s

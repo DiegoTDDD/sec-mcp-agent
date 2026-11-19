@@ -1,0 +1,8 @@
+Q: Who does Netflix say it competes with for members' entertainment time?
+
+{"chunk_id": "NFLX-2026-01-23-risk_factors-008", "quote": "We compete with a broad set of activities for consumers’ leisure time, including other entertainment video providers, such as linear television, streaming entertainment providers (including those that provide pirated content), video gaming providers, open content platform providers, which provide access to user-generated and professionally produced content, as well as more broadly against other sources of entertainment, such as social media, that our members could choose in their moments of free time."}
+
+[1] Netflix Inc (NFLX) 10-K 2026-01-23, risk_factors, NFLX-2026-01-23-risk_factors-008
+    "Piracy also threatens to damage our business, as its fundamental proposition to consumers is so compelling and difficult to compete against: virtually all content for free."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 4 LLM calls, 100.6s

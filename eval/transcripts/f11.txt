@@ -1,0 +1,16 @@
+Q: What risks does Microsoft describe related to artificial intelligence?
+
+Microsoft Corp describes risks related to artificial intelligence in their filings, including the potential for adversaries to use vulnerabilities to install malware and the risk of inadequate account security practices leading to unauthorized access. Additionally, they mention the risk of cyberattacks and security vulnerabilities leading to reduced revenue, increased costs, liability claims, or harm to their reputation or competitive position. They also highlight the complexity of their products and the potential for defects in design, manufacture, or associated software to adversely affect their business and results of operations.
+
+[1] Microsoft Corp (MSFT) 10-K 2026-07-29, risk_factors, MSFT-2026-07-29-risk_factors-003
+    "Expansion of our vertically-integrated capabilities, including developing proprietary hardware, infrastructure, and artificial intelligence (“AI”) models, could increase our cost structure, reduce margins, and expose us to operational risks."
+[2] Microsoft Corp (MSFT) 10-K 2026-07-29, risk_factors, MSFT-2026-07-29-risk_factors-031
+    "Inadequate account security practices may also result in unauthorized access, and user activity may result in ransomware or other malicious software impacting a customer’s use of our products or services."
+[3] Microsoft Corp (MSFT) 10-K 2026-07-29, risk_factors, MSFT-2026-07-29-risk_factors-020
+    "Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation or competitive position."
+[4] Microsoft Corp (MSFT) 10-K 2026-07-29, risk_factors, MSFT-2026-07-29-risk_factors-023
+    "Cyber incidents and attacks, individually or in the aggregate, could adversely affect our financial condition, results of operations, competitive position, and reputation, or expose us to legal or regulatory risk."
+[5] Microsoft Corp (MSFT) 10-K 2026-07-29, risk_factors, MSFT-2026-07-29-risk_factors-058
+    "Failure to prevent, detect, or address defects in design, manufacture, or associated software could adversely affect our business and results of operations."
+
+grounded=True | tools: search_filings | qwen2.5:3b, 5 LLM calls, 199.2s

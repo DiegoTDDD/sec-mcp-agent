@@ -1,0 +1,11 @@
+Q: Score this transaction: card card_0007 paid R$ 64.90 for groceries in Brasilia at 2026-03-01T12:30:00. Should it raise an alert?
+
+Should not raise an alert
+
+[rejected] home_city: chunk_id was not returned by any tool
+[rejected] category: chunk_id was not returned by any tool
+[rejected] threshold: chunk_id was not returned by any tool
+[rejected] probability: chunk_id was not returned by any tool
+[fraud model] p=0.000 flagged=False threshold=0.563; amount=64.9 (-8.45), distance_km_from_home=0 (-2.79), category_entertainment=0 (-1.65)
+
+grounded=False | tools: score_transaction | qwen2.5:3b, 4 LLM calls, 51.7s
