@@ -72,7 +72,7 @@ attached to a chat, and `risk_review` shows up as a prompt.
 
 ## Tests
 
-`pytest -q -p anyio`: 60 tests. Every tool goes through a real MCP client (listing, schemas,
+`pytest -q -p anyio`: 61 tests. Every tool goes through a real MCP client (listing, schemas,
 structured results, validation errors); fraud features follow the training definitions
 (window edges, second truncation, unknown inputs); the agent loop runs with a scripted model
 through tool errors, unknown tools, the step limit, invalid JSON and fabricated or repaired

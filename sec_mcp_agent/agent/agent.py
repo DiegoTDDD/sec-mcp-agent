@@ -344,7 +344,7 @@ def unwrap(draft: AnswerDraft) -> AnswerDraft:
     try:
         inner = json.loads(text)
     except json.JSONDecodeError:
-        return draft
+        return salvage(draft)
     if isinstance(inner, dict) and ("answer" in inner or "citations" in inner):
         nested = unwrap(AnswerDraft(answer=str(inner.get("answer") or ""), citations=[]))
         cites = draft.citations or _citations(inner.get("citations")) or nested.citations
@@ -354,6 +354,23 @@ def unwrap(draft: AnswerDraft) -> AnswerDraft:
     if isinstance(inner, list):
         return AnswerDraft(answer="", citations=draft.citations or _citations(inner))
     return draft
+
+
+CHUNK_ID = re.compile(r"\b[A-Z][A-Z.]{0,5}-\d{4}-\d{2}-\d{2}-(?:business|risk_factors|mda)-\d{3}\b")
+ANSWER_FIELD = re.compile(r"[\"']answer[\"']\s*:\s*\"((?:[^\"\\]|\\.)*)")
+
+
+def salvage(draft: AnswerDraft) -> AnswerDraft:
+    """Nested JSON that does not even parse (eval run 5: mixed quotes, cut-off strings): keep
+    the chunk_ids it mentions and the answer text if one is there. The verifier still checks
+    every id against the retrieved passages."""
+    ids = list(dict.fromkeys(CHUNK_ID.findall(draft.answer)))
+    m = ANSWER_FIELD.search(draft.answer)
+    if not ids and not m:
+        return draft  # prose that happens to start with "[" or "{", e.g. "[E2] shows ..."
+    answer = m.group(1).replace('\\"', '"').strip() if m else ""
+    cites = draft.citations or [CitationDraft(chunk_id=i) for i in ids]
+    return AnswerDraft(answer=answer, citations=cites)
 
 
 def _citations(items: Any) -> list[CitationDraft]:

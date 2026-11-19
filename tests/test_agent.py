@@ -257,3 +257,24 @@ def test_unwrap_leaves_ordinary_answers_alone():
 
     d = AnswerDraft(answer="[E2] shows tariffs matter.", citations=[])
     assert unwrap(d) == d
+
+
+def test_broken_nested_json_is_salvaged():
+    from sec_mcp_agent.agent.agent import unwrap
+    from sec_mcp_agent.agent.schema import AnswerDraft
+
+    broken = (
+        '{"citations": [{\'chunk_id": "JPM-2026-02-13-mda-341", "quote": "The governance '
+        "structure for the Global Cyber"
+    )  # mixed quotes, cut off
+    d = unwrap(AnswerDraft(answer=broken, citations=[]))
+    assert [c.chunk_id for c in d.citations] == ["JPM-2026-02-13-mda-341"] and d.answer == ""
+    d = unwrap(
+        AnswerDraft(
+            answer='{"answer": "Prices are volatile.", "citations": [{"chunk_id": '
+            '"CVX-2026-02-20-risk_factors-002", "quote": "Prices',
+            citations=[],
+        )
+    )
+    assert d.answer == "Prices are volatile."
+    assert [c.chunk_id for c in d.citations] == ["CVX-2026-02-20-risk_factors-002"]
